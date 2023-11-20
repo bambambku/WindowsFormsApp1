@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            customerDataGrid.DataSource = this.CustomersList;
+            customerDataGrid.DataSource = CustomersList;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -84,15 +84,38 @@ namespace WindowsFormsApp1
 
         private void customerAddClick(object sender, EventArgs e)
         {
-            int lastID = CustomersList.Last().ID + 1;
+            int nextID = CustomersList.Last().ID + 1;
             CustomersList.Add(new Customer(
-                lastID,
+                nextID,
                 customerNameTxtbox.Text,
                 customerPhoneTxtbox.Text,
                 customerEmailTxtbox.Text,
                 customerAddressTxtbox.Text));
                 customerDataGrid.DataSource = null;
                 customerDataGrid.DataSource = CustomersList;
+        }
+
+        private void customerUpdateBtn_Click(object sender, EventArgs e)
+        {
+            var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
+            string[] values = {
+                Convert.ToString(selectedCustomer.ID),
+                customerNameTxtbox.Text,
+                customerPhoneTxtbox.Text,
+                customerEmailTxtbox.Text,
+                customerAddressTxtbox.Text
+            };
+            PropertiesUpdater.Update(selectedCustomer, values);
+            customerDataGrid.DataSource = null;
+            customerDataGrid.DataSource = CustomersList;
+        }
+
+        private void customerDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
+            CustomersList.Remove(selectedCustomer);
+            customerDataGrid.DataSource = null;
+            customerDataGrid.DataSource = CustomersList;
         }
     }
 

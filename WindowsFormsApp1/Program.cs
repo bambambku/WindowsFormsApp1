@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace WindowsFormsApp1
 {
@@ -107,4 +108,28 @@ namespace WindowsFormsApp1
         }
 
     }
+
+    public static class PropertiesUpdater
+    {
+        public static void Update(object obj, string[] values)
+        {
+            Type type = obj.GetType();
+            var properties = type.GetProperties();
+            int i = 0;
+            foreach (var prop in properties)
+            {
+                if (prop.PropertyType == typeof(int))
+                {
+                    prop.SetValue(obj, Int32.Parse(values[i]));
+                }
+                else
+                {
+                    prop.SetValue(obj, values[i]);
+                }
+                i++;
+            }
+
+        }
+    }
+
 }
