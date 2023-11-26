@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SomeClasses.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +83,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\DataSources\Customer.datasource" />
+    <None Include="Properties\DataSources\Order.datasource" />
+    <None Include="Properties\DataSources\Product.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

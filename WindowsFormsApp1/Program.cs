@@ -32,11 +32,6 @@ namespace WindowsFormsApp1
 
                 List.Add(new Customer(ID, name, phone, address, email));
         }
-
-        public void ReadCSV(string csvPath)
-        {
-
-        }
     }
 
     public class Product
@@ -46,11 +41,22 @@ namespace WindowsFormsApp1
         public string Description { get; set; }
         public string Category { get; set; }
         public int Qty { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
-        public Product(string name, string description, string category, int qty, int price)
+        public Product(int id, string name, string description, string category, int qty, decimal price)
         {
+            Id = id;
+            Name = name;
+            Description = description;
+            Category = category;
+            Qty = qty;
+            Price = price;
 
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 
@@ -59,9 +65,24 @@ namespace WindowsFormsApp1
     public class Order
     {
         public int ID { get; set; }
-        public List<Product> ProductList { get; set; }
+        public Dictionary<Product, int> ProductOrderDictionary { get; set; }
         public DateTime DateCreated { get; set; }
-        public Customer OrderedBy { get; set; }
+        public Customer ByCustomer { get; set; }
+        public decimal Price { get; set; }
+
+        public Order(int id, Dictionary<Product, int> productOrderDictionary, DateTime datecreated, Customer byCustomer)
+        {
+            id = ID;
+            ProductOrderDictionary = productOrderDictionary;
+            DateCreated = datecreated;
+            ByCustomer = byCustomer;
+            decimal price = 0;
+            foreach (var kvp in productOrderDictionary)
+            {
+                price += kvp.Key.Price * kvp.Value;
+            }
+            Price = price;
+        }
     }
 
     public class Stock
@@ -107,9 +128,13 @@ namespace WindowsFormsApp1
             Email = email;
         }
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 
-    public static class PropertiesUpdater
+    public static class PropertiesHandler
     {
         public static void Update(object obj, string[] values)
         {
@@ -121,6 +146,9 @@ namespace WindowsFormsApp1
                 if (prop.PropertyType == typeof(int))
                 {
                     prop.SetValue(obj, Int32.Parse(values[i]));
+                } else if (prop.PropertyType == typeof(decimal))
+                {
+                    prop.SetValue(obj, Decimal.Parse(values[i]));
                 }
                 else
                 {
@@ -128,8 +156,31 @@ namespace WindowsFormsApp1
                 }
                 i++;
             }
-
         }
+
+        public static List<string> ObjectToList(object obj)
+        {
+            Type type = obj.GetType();
+            var properties = type.GetProperties();
+            List<string> list = new List<string>();
+            foreach (var prop in properties)
+            {
+                if (prop.PropertyType == typeof(int))
+                {
+                    list.Add(Convert.ToString(prop.GetValue(obj)));
+                }
+                else
+                {
+                    list.Add(Convert.ToString(prop.GetValue(obj)));
+                }
+            }
+            return list;
+        }
+    }
+
+    public static class CSVHAndler
+    {
+     
     }
 
 }

@@ -19,36 +19,68 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         public List<Customer> CustomersList {  get; set; }
+        public List<Product> ProductsList { get; set; }
+        public List<Order> OrdersList { get; set; }
         public Form1()
         {
             CustomersList = GetCustomers();
+            
+            ProductsList = GetProducts();
+            OrdersList = GetOrders();
+            
             InitializeComponent();
             customerDataGrid.DataSource = CustomersList;
+            productDataGrid.DataSource = ProductsList;
+            orderGridViewLeft.DataSource = OrdersList;
+            orderCustomerSelectedBox.DataSource = CustomersList;
+        }
+
+        private List<Order> GetOrders()
+        {
+            List<Order> newOrdersList = new List<Order>();
+            newOrdersList.Add(new Order(1, new Dictionary<Product, int>()
+            {
+                { ProductsList[1], 12 },
+                { ProductsList[2], 13 }
+            }, DateTime.Now, CustomersList[0]));
+            return newOrdersList;
+
+        }
+
+        private List<Product> GetProducts()
+        {
+            List<Product> newProductsList = new List<Product>();
+            newProductsList.Add(new Product(1, "Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
+            newProductsList.Add(new Product(2, "Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
+            newProductsList.Add(new Product(3, "Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
+            newProductsList.Add(new Product(4, "Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
+            newProductsList.Add(new Product(5, "PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
+            newProductsList.Add(new Product(6, "Notepad", "200 pages, lines, hardback", "Office", 1123, 5.99m));
+            return newProductsList;
         }
 
         private List<Customer> GetCustomers()
         {
-            List<Customer> newCustomerList = new List<Customer>();
-            newCustomerList.Add(new Customer(101, "Frames Ltd", "07456546456", "13 Barnsley Road, WF92LD, Pontefract", "frames@gmail.com"));
-            newCustomerList.Add(new Customer(102, "Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
-            newCustomerList.Add(new Customer(103, "Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com"));
-            return newCustomerList;
+            List<Customer> newCustomersList = new List<Customer>();
+            newCustomersList.Add(new Customer(101, "Frames Ltd", "07456546456", "13 Barnsley Road, WF92LD, Pontefract", "frames@gmail.com"));
+            newCustomersList.Add(new Customer(102, "Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
+            newCustomersList.Add(new Customer(103, "Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com")
+            {
+              
+            });
+            return newCustomersList;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-            customerDataGrid.DataSource = CustomersList;
-        }
+       
 
         private void label1_Click(object sender, EventArgs e)
         {
-            stockPanel.Show();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            panel1.Hide();
+            
 
         }
 
@@ -57,10 +89,22 @@ namespace WindowsFormsApp1
 
         }
 
+        private void productDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+
+            productNameTxtbox.Text = selectedProduct.Name;
+            productCategoryTxtbox.Text = selectedProduct.Category;
+            productQtyTxtbox.Text = Convert.ToString(selectedProduct.Qty);
+            productPriceTxtbox.Text = Convert.ToString(selectedProduct.Price);
+            productDescriptionTxtbox.Text = selectedProduct.Description;
+
+        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
+
             customerNameTxtbox.Text = selectedCustomer.Name;
             customerPhoneTxtbox.Text = selectedCustomer.Phone;
             customerEmailTxtbox.Text = selectedCustomer.Email;  
@@ -105,7 +149,7 @@ namespace WindowsFormsApp1
                 customerEmailTxtbox.Text,
                 customerAddressTxtbox.Text
             };
-            PropertiesUpdater.Update(selectedCustomer, values);
+            PropertiesHandler.Update(selectedCustomer, values);
             customerDataGrid.DataSource = null;
             customerDataGrid.DataSource = CustomersList;
         }
@@ -116,6 +160,132 @@ namespace WindowsFormsApp1
             CustomersList.Remove(selectedCustomer);
             customerDataGrid.DataSource = null;
             customerDataGrid.DataSource = CustomersList;
+        }
+
+        private void customersButton_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void productsBtn_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void label2_Click_3(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productNameTxtbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productAddClick(object sender, EventArgs e)
+        {
+            int nextID = ProductsList.Last().Id + 1;
+            ProductsList.Add(new Product(
+                nextID,
+                productNameTxtbox.Text,
+                productDescriptionTxtbox.Text,
+                productCategoryTxtbox.Text,
+                Int32.Parse(productQtyTxtbox.Text),
+                Decimal.Parse(productPriceTxtbox.Text)));
+            productDataGrid.DataSource = null;
+            productDataGrid.DataSource = ProductsList;
+        }
+
+        private void productUpdateClick(object sender, EventArgs e)
+        {
+            var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+            string[] values = {
+                Convert.ToString(selectedProduct.Id),
+                productNameTxtbox.Text,
+                productDescriptionTxtbox.Text,
+                productCategoryTxtbox.Text,
+                productQtyTxtbox.Text,
+                productPriceTxtbox.Text
+            };
+            PropertiesHandler.Update(selectedProduct, values);
+            productDataGrid.DataSource = null;
+            productDataGrid.DataSource = ProductsList;
+        }
+
+        private void productDeleteClick(object sender, EventArgs e)
+        {
+            var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+            ProductsList.Remove(selectedProduct);
+            productDataGrid.DataSource = null;
+            productDataGrid.DataSource = ProductsList;
+        }
+
+        private void label2_Click_4(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void orderGridViewLeft_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+            orderCustomerTxtbox.Text = selectedOrder.ByCustomer.Name;
+            List<Product> orderProductList = new List<Product>();
+            foreach (var orderProduct in selectedOrder.ProductOrderDictionary)
+            {
+                orderProductList.Add(orderProduct.Key);
+            };
+            orderProductDataGrid.DataSource = orderProductList;
+        }
+
+        private void orderProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedOrderProduct = orderProductDataGrid.SelectedRows[0].DataBoundItem as Product;
+            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+            orderProductTxtbox.Text = selectedOrderProduct.Name;
+            orderProductQtyTxtbox.Text = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct]);
+            string currentPrice = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct] * selectedOrderProduct.Price);
+            orderProductPriceTxtbox.Text = currentPrice;
         }
     }
 
