@@ -315,6 +315,35 @@ namespace WindowsFormsApp1
         private void orderProductTrainTxtboxUpdate(object sender, EventArgs e)
         {
             orderProductTrainTxtbox.Text = orderProductComboBox.SelectedItem.ToString();
+            var selectedProductComboBoxPrice = (orderProductComboBox.SelectedItem as Product).Price;
+            var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : Int32.Parse(orderProductQtyTxtbox.Text);
+            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBoxPrice).ToString();
+        }
+
+        private void orderProductQtyTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            var selectedProductComboBoxPrice = (orderProductComboBox.SelectedItem as Product).Price;
+            var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : Int32.Parse(orderProductQtyTxtbox.Text);
+            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBoxPrice).ToString();
+        }
+
+        private void orderPriceTxtboxUpdater()
+        {
+            var selectedProductComboBoxPrice = (orderProductComboBox.SelectedItem as Product).Price;
+            var orderProductQtyInput = Int32.TryParse(orderProductQtyTxtbox.Text, out int qty) ? qty : 0;
+            var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : qty;
+            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBoxPrice).ToString();
+        }
+
+        private void orderProductPriceTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            if (Decimal.TryParse(orderProductPriceTxtbox.Text, out decimal converted) == false)
+            {
+                orderProductPriceTxtbox.Text = (0.00).ToString();
+            } else
+            {
+                orderProductPriceTxtbox.Text = converted.ToString();
+            }
         }
     }
 

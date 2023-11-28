@@ -34,6 +34,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.customersPanel = new System.Windows.Forms.Panel();
             this.customerDeleteBtn = new System.Windows.Forms.Button();
+            this.customerAddBtn = new System.Windows.Forms.Button();
             this.customerUpdateBtn = new System.Windows.Forms.Button();
             this.customerAddressTxtbox = new System.Windows.Forms.TextBox();
             this.customerAddressLbl = new System.Windows.Forms.Label();
@@ -66,6 +67,18 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.orderProductTrainTxtbox = new System.Windows.Forms.TextBox();
+            this.orderDeleteBtn = new System.Windows.Forms.Button();
+            this.orderUpdateBtn = new System.Windows.Forms.Button();
+            this.orderProductDeleteBtn = new System.Windows.Forms.Button();
+            this.orderProductUpdateBtn = new System.Windows.Forms.Button();
+            this.orderProductAddBtn = new System.Windows.Forms.Button();
+            this.orderAddBtn = new System.Windows.Forms.Button();
+            this.orderProductComboBox = new System.Windows.Forms.ComboBox();
+            this.orderCustomerComboLbl = new System.Windows.Forms.Label();
+            this.orderPriceLbl = new System.Windows.Forms.Label();
+            this.orderPriceTxtbox = new System.Windows.Forms.TextBox();
+            this.orderCustomerComboBox = new System.Windows.Forms.ComboBox();
             this.orderProductPriceTxtbox = new System.Windows.Forms.TextBox();
             this.orderProductQtyTxtbox = new System.Windows.Forms.TextBox();
             this.orderDateTxtbox = new System.Windows.Forms.TextBox();
@@ -81,18 +94,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customerAddBtn = new System.Windows.Forms.Button();
-            this.orderCustomerComboBox = new System.Windows.Forms.ComboBox();
-            this.orderPriceTxtbox = new System.Windows.Forms.TextBox();
-            this.orderPriceLbl = new System.Windows.Forms.Label();
-            this.orderCustomerComboLbl = new System.Windows.Forms.Label();
-            this.orderProductComboBox = new System.Windows.Forms.ComboBox();
-            this.orderAddBtn = new System.Windows.Forms.Button();
-            this.orderUpdateBtn = new System.Windows.Forms.Button();
-            this.orderDeleteBtn = new System.Windows.Forms.Button();
-            this.orderProductAddBtn = new System.Windows.Forms.Button();
-            this.orderProductUpdateBtn = new System.Windows.Forms.Button();
-            this.orderProductDeleteBtn = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,7 +113,6 @@
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.orderProductTrainTxtbox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -202,6 +202,16 @@
             this.customerDeleteBtn.Text = "DELETE";
             this.customerDeleteBtn.UseVisualStyleBackColor = true;
             this.customerDeleteBtn.Click += new System.EventHandler(this.customerDeleteBtn_Click);
+            // 
+            // customerAddBtn
+            // 
+            this.customerAddBtn.Location = new System.Drawing.Point(30, 126);
+            this.customerAddBtn.Name = "customerAddBtn";
+            this.customerAddBtn.Size = new System.Drawing.Size(127, 37);
+            this.customerAddBtn.TabIndex = 7;
+            this.customerAddBtn.Text = "ADD";
+            this.customerAddBtn.UseVisualStyleBackColor = true;
+            this.customerAddBtn.Click += new System.EventHandler(this.customerAddClick);
             // 
             // customerUpdateBtn
             // 
@@ -534,6 +544,111 @@
             this.panel3.Size = new System.Drawing.Size(822, 507);
             this.panel3.TabIndex = 0;
             // 
+            // orderProductTrainTxtbox
+            // 
+            this.orderProductTrainTxtbox.Location = new System.Drawing.Point(396, 78);
+            this.orderProductTrainTxtbox.Name = "orderProductTrainTxtbox";
+            this.orderProductTrainTxtbox.Size = new System.Drawing.Size(148, 20);
+            this.orderProductTrainTxtbox.TabIndex = 12;
+            // 
+            // orderDeleteBtn
+            // 
+            this.orderDeleteBtn.Location = new System.Drawing.Point(251, 119);
+            this.orderDeleteBtn.Name = "orderDeleteBtn";
+            this.orderDeleteBtn.Size = new System.Drawing.Size(84, 46);
+            this.orderDeleteBtn.TabIndex = 11;
+            this.orderDeleteBtn.Text = "DELETE ORDER";
+            this.orderDeleteBtn.UseVisualStyleBackColor = true;
+            // 
+            // orderUpdateBtn
+            // 
+            this.orderUpdateBtn.Location = new System.Drawing.Point(131, 119);
+            this.orderUpdateBtn.Name = "orderUpdateBtn";
+            this.orderUpdateBtn.Size = new System.Drawing.Size(90, 46);
+            this.orderUpdateBtn.TabIndex = 11;
+            this.orderUpdateBtn.Text = "UPDATE ORDER";
+            this.orderUpdateBtn.UseVisualStyleBackColor = true;
+            // 
+            // orderProductDeleteBtn
+            // 
+            this.orderProductDeleteBtn.Location = new System.Drawing.Point(640, 119);
+            this.orderProductDeleteBtn.Name = "orderProductDeleteBtn";
+            this.orderProductDeleteBtn.Size = new System.Drawing.Size(79, 46);
+            this.orderProductDeleteBtn.TabIndex = 11;
+            this.orderProductDeleteBtn.Text = "DELETE PRODUCT";
+            this.orderProductDeleteBtn.UseVisualStyleBackColor = true;
+            // 
+            // orderProductUpdateBtn
+            // 
+            this.orderProductUpdateBtn.Location = new System.Drawing.Point(530, 119);
+            this.orderProductUpdateBtn.Name = "orderProductUpdateBtn";
+            this.orderProductUpdateBtn.Size = new System.Drawing.Size(79, 46);
+            this.orderProductUpdateBtn.TabIndex = 11;
+            this.orderProductUpdateBtn.Text = "UPDATE PRODUCT";
+            this.orderProductUpdateBtn.UseVisualStyleBackColor = true;
+            // 
+            // orderProductAddBtn
+            // 
+            this.orderProductAddBtn.Location = new System.Drawing.Point(418, 119);
+            this.orderProductAddBtn.Name = "orderProductAddBtn";
+            this.orderProductAddBtn.Size = new System.Drawing.Size(79, 46);
+            this.orderProductAddBtn.TabIndex = 11;
+            this.orderProductAddBtn.Text = "ADD PRODUCT";
+            this.orderProductAddBtn.UseVisualStyleBackColor = true;
+            this.orderProductAddBtn.Click += new System.EventHandler(this.orderProductAddBtn_Click);
+            // 
+            // orderAddBtn
+            // 
+            this.orderAddBtn.Location = new System.Drawing.Point(20, 119);
+            this.orderAddBtn.Name = "orderAddBtn";
+            this.orderAddBtn.Size = new System.Drawing.Size(79, 46);
+            this.orderAddBtn.TabIndex = 11;
+            this.orderAddBtn.Text = "ADD ORDER";
+            this.orderAddBtn.UseVisualStyleBackColor = true;
+            // 
+            // orderProductComboBox
+            // 
+            this.orderProductComboBox.FormattingEnabled = true;
+            this.orderProductComboBox.Location = new System.Drawing.Point(396, 40);
+            this.orderProductComboBox.Name = "orderProductComboBox";
+            this.orderProductComboBox.Size = new System.Drawing.Size(148, 21);
+            this.orderProductComboBox.TabIndex = 10;
+            this.orderProductComboBox.SelectedIndexChanged += new System.EventHandler(this.orderProductTrainTxtboxUpdate);
+            // 
+            // orderCustomerComboLbl
+            // 
+            this.orderCustomerComboLbl.AutoSize = true;
+            this.orderCustomerComboLbl.Location = new System.Drawing.Point(17, 62);
+            this.orderCustomerComboLbl.Name = "orderCustomerComboLbl";
+            this.orderCustomerComboLbl.Size = new System.Drawing.Size(51, 13);
+            this.orderCustomerComboLbl.TabIndex = 9;
+            this.orderCustomerComboLbl.Text = "Customer";
+            // 
+            // orderPriceLbl
+            // 
+            this.orderPriceLbl.AutoSize = true;
+            this.orderPriceLbl.Location = new System.Drawing.Point(177, 23);
+            this.orderPriceLbl.Name = "orderPriceLbl";
+            this.orderPriceLbl.Size = new System.Drawing.Size(31, 13);
+            this.orderPriceLbl.TabIndex = 8;
+            this.orderPriceLbl.Text = "Price";
+            // 
+            // orderPriceTxtbox
+            // 
+            this.orderPriceTxtbox.Location = new System.Drawing.Point(177, 39);
+            this.orderPriceTxtbox.Name = "orderPriceTxtbox";
+            this.orderPriceTxtbox.ReadOnly = true;
+            this.orderPriceTxtbox.Size = new System.Drawing.Size(158, 20);
+            this.orderPriceTxtbox.TabIndex = 7;
+            // 
+            // orderCustomerComboBox
+            // 
+            this.orderCustomerComboBox.FormattingEnabled = true;
+            this.orderCustomerComboBox.Location = new System.Drawing.Point(20, 78);
+            this.orderCustomerComboBox.Name = "orderCustomerComboBox";
+            this.orderCustomerComboBox.Size = new System.Drawing.Size(315, 21);
+            this.orderCustomerComboBox.TabIndex = 6;
+            // 
             // orderProductPriceTxtbox
             // 
             this.orderProductPriceTxtbox.Location = new System.Drawing.Point(658, 41);
@@ -541,6 +656,7 @@
             this.orderProductPriceTxtbox.ReadOnly = true;
             this.orderProductPriceTxtbox.Size = new System.Drawing.Size(80, 20);
             this.orderProductPriceTxtbox.TabIndex = 3;
+            this.orderProductPriceTxtbox.TextChanged += new System.EventHandler(this.orderProductPriceTxtbox_TextChanged);
             // 
             // orderProductQtyTxtbox
             // 
@@ -548,6 +664,7 @@
             this.orderProductQtyTxtbox.Name = "orderProductQtyTxtbox";
             this.orderProductQtyTxtbox.Size = new System.Drawing.Size(72, 20);
             this.orderProductQtyTxtbox.TabIndex = 3;
+            this.orderProductQtyTxtbox.TextChanged += new System.EventHandler(this.orderProductQtyTxtbox_TextChanged);
             // 
             // orderDateTxtbox
             // 
@@ -679,114 +796,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Manager App";
             // 
-            // customerAddBtn
-            // 
-            this.customerAddBtn.Location = new System.Drawing.Point(30, 126);
-            this.customerAddBtn.Name = "customerAddBtn";
-            this.customerAddBtn.Size = new System.Drawing.Size(127, 37);
-            this.customerAddBtn.TabIndex = 7;
-            this.customerAddBtn.Text = "ADD";
-            this.customerAddBtn.UseVisualStyleBackColor = true;
-            this.customerAddBtn.Click += new System.EventHandler(this.customerAddClick);
-            // 
-            // orderCustomerComboBox
-            // 
-            this.orderCustomerComboBox.FormattingEnabled = true;
-            this.orderCustomerComboBox.Location = new System.Drawing.Point(20, 78);
-            this.orderCustomerComboBox.Name = "orderCustomerComboBox";
-            this.orderCustomerComboBox.Size = new System.Drawing.Size(315, 21);
-            this.orderCustomerComboBox.TabIndex = 6;
-            // 
-            // orderPriceTxtbox
-            // 
-            this.orderPriceTxtbox.Location = new System.Drawing.Point(177, 39);
-            this.orderPriceTxtbox.Name = "orderPriceTxtbox";
-            this.orderPriceTxtbox.ReadOnly = true;
-            this.orderPriceTxtbox.Size = new System.Drawing.Size(158, 20);
-            this.orderPriceTxtbox.TabIndex = 7;
-            // 
-            // orderPriceLbl
-            // 
-            this.orderPriceLbl.AutoSize = true;
-            this.orderPriceLbl.Location = new System.Drawing.Point(177, 23);
-            this.orderPriceLbl.Name = "orderPriceLbl";
-            this.orderPriceLbl.Size = new System.Drawing.Size(31, 13);
-            this.orderPriceLbl.TabIndex = 8;
-            this.orderPriceLbl.Text = "Price";
-            // 
-            // orderCustomerComboLbl
-            // 
-            this.orderCustomerComboLbl.AutoSize = true;
-            this.orderCustomerComboLbl.Location = new System.Drawing.Point(17, 62);
-            this.orderCustomerComboLbl.Name = "orderCustomerComboLbl";
-            this.orderCustomerComboLbl.Size = new System.Drawing.Size(51, 13);
-            this.orderCustomerComboLbl.TabIndex = 9;
-            this.orderCustomerComboLbl.Text = "Customer";
-            // 
-            // orderProductComboBox
-            // 
-            this.orderProductComboBox.FormattingEnabled = true;
-            this.orderProductComboBox.Location = new System.Drawing.Point(396, 40);
-            this.orderProductComboBox.Name = "orderProductComboBox";
-            this.orderProductComboBox.Size = new System.Drawing.Size(148, 21);
-            this.orderProductComboBox.TabIndex = 10;
-            this.orderProductComboBox.SelectedIndexChanged += new System.EventHandler(this.orderProductTrainTxtboxUpdate);
-            // 
-            // orderAddBtn
-            // 
-            this.orderAddBtn.Location = new System.Drawing.Point(20, 119);
-            this.orderAddBtn.Name = "orderAddBtn";
-            this.orderAddBtn.Size = new System.Drawing.Size(79, 46);
-            this.orderAddBtn.TabIndex = 11;
-            this.orderAddBtn.Text = "ADD ORDER";
-            this.orderAddBtn.UseVisualStyleBackColor = true;
-            // 
-            // orderUpdateBtn
-            // 
-            this.orderUpdateBtn.Location = new System.Drawing.Point(131, 119);
-            this.orderUpdateBtn.Name = "orderUpdateBtn";
-            this.orderUpdateBtn.Size = new System.Drawing.Size(90, 46);
-            this.orderUpdateBtn.TabIndex = 11;
-            this.orderUpdateBtn.Text = "UPDATE ORDER";
-            this.orderUpdateBtn.UseVisualStyleBackColor = true;
-            // 
-            // orderDeleteBtn
-            // 
-            this.orderDeleteBtn.Location = new System.Drawing.Point(251, 119);
-            this.orderDeleteBtn.Name = "orderDeleteBtn";
-            this.orderDeleteBtn.Size = new System.Drawing.Size(84, 46);
-            this.orderDeleteBtn.TabIndex = 11;
-            this.orderDeleteBtn.Text = "DELETE ORDER";
-            this.orderDeleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // orderProductAddBtn
-            // 
-            this.orderProductAddBtn.Location = new System.Drawing.Point(418, 119);
-            this.orderProductAddBtn.Name = "orderProductAddBtn";
-            this.orderProductAddBtn.Size = new System.Drawing.Size(79, 46);
-            this.orderProductAddBtn.TabIndex = 11;
-            this.orderProductAddBtn.Text = "ADD PRODUCT";
-            this.orderProductAddBtn.UseVisualStyleBackColor = true;
-            this.orderProductAddBtn.Click += new System.EventHandler(this.orderProductAddBtn_Click);
-            // 
-            // orderProductUpdateBtn
-            // 
-            this.orderProductUpdateBtn.Location = new System.Drawing.Point(530, 119);
-            this.orderProductUpdateBtn.Name = "orderProductUpdateBtn";
-            this.orderProductUpdateBtn.Size = new System.Drawing.Size(79, 46);
-            this.orderProductUpdateBtn.TabIndex = 11;
-            this.orderProductUpdateBtn.Text = "UPDATE PRODUCT";
-            this.orderProductUpdateBtn.UseVisualStyleBackColor = true;
-            // 
-            // orderProductDeleteBtn
-            // 
-            this.orderProductDeleteBtn.Location = new System.Drawing.Point(640, 119);
-            this.orderProductDeleteBtn.Name = "orderProductDeleteBtn";
-            this.orderProductDeleteBtn.Size = new System.Drawing.Size(79, 46);
-            this.orderProductDeleteBtn.TabIndex = 11;
-            this.orderProductDeleteBtn.Text = "DELETE PRODUCT";
-            this.orderProductDeleteBtn.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
@@ -886,13 +895,6 @@
             // orderBindingSource
             // 
             this.orderBindingSource.DataSource = typeof(WindowsFormsApp1.Order);
-            // 
-            // orderProductTrainTxtbox
-            // 
-            this.orderProductTrainTxtbox.Location = new System.Drawing.Point(396, 78);
-            this.orderProductTrainTxtbox.Name = "orderProductTrainTxtbox";
-            this.orderProductTrainTxtbox.Size = new System.Drawing.Size(148, 20);
-            this.orderProductTrainTxtbox.TabIndex = 12;
             // 
             // Form1
             // 
