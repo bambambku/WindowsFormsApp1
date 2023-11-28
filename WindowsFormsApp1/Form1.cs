@@ -32,7 +32,8 @@ namespace WindowsFormsApp1
             customerDataGrid.DataSource = CustomersList;
             productDataGrid.DataSource = ProductsList;
             orderGridViewLeft.DataSource = OrdersList;
-            orderCustomerSelectedBox.DataSource = CustomersList;
+            orderProductComboBox.DataSource = ProductsList;
+            orderCustomerComboBox.DataSource = CustomersList;
         }
 
         private List<Order> GetOrders()
@@ -43,6 +44,11 @@ namespace WindowsFormsApp1
                 { ProductsList[1], 12 },
                 { ProductsList[2], 13 }
             }, DateTime.Now, CustomersList[0]));
+            newOrdersList.Add(new Order(2, new Dictionary<Product, int>()
+            {
+                { ProductsList[3], 123 },
+                { ProductsList[4], 133 }
+            }, DateTime.Now, CustomersList[2]));
             return newOrdersList;
 
         }
@@ -269,7 +275,35 @@ namespace WindowsFormsApp1
         {
 
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
-            orderCustomerTxtbox.Text = selectedOrder.ByCustomer.Name;
+            orderCustomerComboBox.SelectedItem = selectedOrder.ByCustomer;
+            orderDateTxtbox.Text = Convert.ToString(selectedOrder.DateCreated);
+            orderPriceTxtbox.Text = selectedOrder.Price.ToString();
+            List<Product> orderProductList = new List<Product>();
+            foreach (var orderProduct in selectedOrder.ProductOrderDictionary)
+            {
+                orderProductList.Add(orderProduct.Key);
+            };
+            orderProductDataGrid.DataSource = orderProductList;
+            
+        }
+
+        private void orderProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedOrderProduct = orderProductDataGrid.SelectedRows[0].DataBoundItem as Product;
+            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+            orderProductComboBox.SelectedItem = selectedOrderProduct;
+            orderProductQtyTxtbox.Text = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct]);
+            string currentPrice = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct] * selectedOrderProduct.Price);
+            orderProductPriceTxtbox.Text = currentPrice;
+        }
+
+        private void orderProductAddBtn_Click(object sender, EventArgs e)
+        {
+            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+            selectedOrder.ProductOrderDictionary.Add(
+                 orderProductComboBox.SelectedItem as Product,
+                    Int32.Parse(orderProductQtyTxtbox.Text));
+            orderGridViewLeft.DataSource = OrdersList;
             List<Product> orderProductList = new List<Product>();
             foreach (var orderProduct in selectedOrder.ProductOrderDictionary)
             {
@@ -278,14 +312,9 @@ namespace WindowsFormsApp1
             orderProductDataGrid.DataSource = orderProductList;
         }
 
-        private void orderProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void orderProductTrainTxtboxUpdate(object sender, EventArgs e)
         {
-            var selectedOrderProduct = orderProductDataGrid.SelectedRows[0].DataBoundItem as Product;
-            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
-            orderProductTxtbox.Text = selectedOrderProduct.Name;
-            orderProductQtyTxtbox.Text = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct]);
-            string currentPrice = Convert.ToString(selectedOrder.ProductOrderDictionary[selectedOrderProduct] * selectedOrderProduct.Price);
-            orderProductPriceTxtbox.Text = currentPrice;
+            orderProductTrainTxtbox.Text = orderProductComboBox.SelectedItem.ToString();
         }
     }
 
