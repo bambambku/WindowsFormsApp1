@@ -67,7 +67,8 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.orderProductTrainTxtbox = new System.Windows.Forms.TextBox();
+            this.orderProductQtyWarningLbl = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.orderDeleteBtn = new System.Windows.Forms.Button();
             this.orderUpdateBtn = new System.Windows.Forms.Button();
             this.orderProductDeleteBtn = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customerWarningLbl = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -175,6 +177,7 @@
             // customersPanel
             // 
             this.customersPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.customersPanel.Controls.Add(this.customerWarningLbl);
             this.customersPanel.Controls.Add(this.customerDeleteBtn);
             this.customersPanel.Controls.Add(this.customerAddBtn);
             this.customersPanel.Controls.Add(this.customerUpdateBtn);
@@ -265,6 +268,7 @@
             this.customerEmailTxtbox.Name = "customerEmailTxtbox";
             this.customerEmailTxtbox.Size = new System.Drawing.Size(127, 20);
             this.customerEmailTxtbox.TabIndex = 3;
+            this.customerEmailTxtbox.TextChanged += new System.EventHandler(this.customerEmailTxtbox_TextChanged);
             // 
             // customerPhoneTxtbox
             // 
@@ -272,6 +276,7 @@
             this.customerPhoneTxtbox.Name = "customerPhoneTxtbox";
             this.customerPhoneTxtbox.Size = new System.Drawing.Size(127, 20);
             this.customerPhoneTxtbox.TabIndex = 3;
+            this.customerPhoneTxtbox.TextChanged += new System.EventHandler(this.customerPhoneTxtbox_TextChanged);
             // 
             // customerNameTxtbox
             // 
@@ -279,6 +284,7 @@
             this.customerNameTxtbox.Name = "customerNameTxtbox";
             this.customerNameTxtbox.Size = new System.Drawing.Size(127, 20);
             this.customerNameTxtbox.TabIndex = 3;
+            this.customerNameTxtbox.Text = "sasa";
             this.customerNameTxtbox.TextChanged += new System.EventHandler(this.productNameTxtbox_TextChanged);
             // 
             // customerNameLbl
@@ -518,7 +524,8 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel3.Controls.Add(this.orderProductTrainTxtbox);
+            this.panel3.Controls.Add(this.orderProductQtyWarningLbl);
+            this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.orderDeleteBtn);
             this.panel3.Controls.Add(this.orderUpdateBtn);
             this.panel3.Controls.Add(this.orderProductDeleteBtn);
@@ -543,13 +550,25 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(822, 507);
             this.panel3.TabIndex = 0;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // orderProductTrainTxtbox
+            // orderProductQtyWarningLbl
             // 
-            this.orderProductTrainTxtbox.Location = new System.Drawing.Point(396, 78);
-            this.orderProductTrainTxtbox.Name = "orderProductTrainTxtbox";
-            this.orderProductTrainTxtbox.Size = new System.Drawing.Size(148, 20);
-            this.orderProductTrainTxtbox.TabIndex = 12;
+            this.orderProductQtyWarningLbl.AutoSize = true;
+            this.orderProductQtyWarningLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderProductQtyWarningLbl.Location = new System.Drawing.Point(466, 88);
+            this.orderProductQtyWarningLbl.Name = "orderProductQtyWarningLbl";
+            this.orderProductQtyWarningLbl.Size = new System.Drawing.Size(0, 9);
+            this.orderProductQtyWarningLbl.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(466, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Click += new System.EventHandler(this.label2_Click_5);
             // 
             // orderDeleteBtn
             // 
@@ -577,6 +596,7 @@
             this.orderProductDeleteBtn.TabIndex = 11;
             this.orderProductDeleteBtn.Text = "DELETE PRODUCT";
             this.orderProductDeleteBtn.UseVisualStyleBackColor = true;
+            this.orderProductDeleteBtn.Click += new System.EventHandler(this.orderProductDeleteBtn_Click);
             // 
             // orderProductUpdateBtn
             // 
@@ -586,6 +606,7 @@
             this.orderProductUpdateBtn.TabIndex = 11;
             this.orderProductUpdateBtn.Text = "UPDATE PRODUCT";
             this.orderProductUpdateBtn.UseVisualStyleBackColor = true;
+            this.orderProductUpdateBtn.Click += new System.EventHandler(this.orderProductUpdateBtn_Click);
             // 
             // orderProductAddBtn
             // 
@@ -608,12 +629,13 @@
             // 
             // orderProductComboBox
             // 
+            this.orderProductComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderProductComboBox.FormattingEnabled = true;
             this.orderProductComboBox.Location = new System.Drawing.Point(396, 40);
             this.orderProductComboBox.Name = "orderProductComboBox";
             this.orderProductComboBox.Size = new System.Drawing.Size(148, 21);
             this.orderProductComboBox.TabIndex = 10;
-            this.orderProductComboBox.SelectedIndexChanged += new System.EventHandler(this.orderProductTrainTxtboxUpdate);
+            this.orderProductComboBox.SelectedIndexChanged += new System.EventHandler(this.orderProductComboBoxChangePriceTextboxUpdate);
             // 
             // orderCustomerComboLbl
             // 
@@ -643,6 +665,7 @@
             // 
             // orderCustomerComboBox
             // 
+            this.orderCustomerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderCustomerComboBox.FormattingEnabled = true;
             this.orderCustomerComboBox.Location = new System.Drawing.Point(20, 78);
             this.orderCustomerComboBox.Name = "orderCustomerComboBox";
@@ -795,6 +818,15 @@
             this.label1.Size = new System.Drawing.Size(337, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Manager App";
+            // 
+            // customerWarningLbl
+            // 
+            this.customerWarningLbl.AutoSize = true;
+            this.customerWarningLbl.Location = new System.Drawing.Point(181, 72);
+            this.customerWarningLbl.Name = "customerWarningLbl";
+            this.customerWarningLbl.Size = new System.Drawing.Size(35, 13);
+            this.customerWarningLbl.TabIndex = 8;
+            this.customerWarningLbl.Text = "label3";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1021,7 +1053,9 @@
         private System.Windows.Forms.Button orderProductUpdateBtn;
         private System.Windows.Forms.Button orderProductAddBtn;
         private System.Windows.Forms.Button orderAddBtn;
-        private System.Windows.Forms.TextBox orderProductTrainTxtbox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label orderProductQtyWarningLbl;
+        private System.Windows.Forms.Label customerWarningLbl;
     }
 }
 
