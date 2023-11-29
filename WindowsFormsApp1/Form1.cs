@@ -15,23 +15,25 @@ using System.Xml.Linq;
 
 namespace WindowsFormsApp1
 {
-    
 
-   
+
+
 
     public partial class Form1 : Form
     {
         //public Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-        public List<Customer> CustomersList {  get; set; }
+        public List<Customer> CustomersList { get; set; }
         public List<Product> ProductsList { get; set; }
         public List<Order> OrdersList { get; set; }
+        public int integerO = 1;
+        public decimal decimalO = 1.1m;
         public Form1()
         {
             CustomersList = GetCustomers();
-            
+
             ProductsList = GetProducts();
             OrdersList = GetOrders();
-            
+
             InitializeComponent();
             customerDataGrid.DataSource = CustomersList;
             productDataGrid.DataSource = ProductsList;
@@ -76,12 +78,12 @@ namespace WindowsFormsApp1
             newCustomersList.Add(new Customer(102, "Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
             newCustomersList.Add(new Customer(103, "Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com")
             {
-              
+
             });
             return newCustomersList;
         }
 
-       
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -90,7 +92,7 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -117,7 +119,7 @@ namespace WindowsFormsApp1
 
             customerNameTxtbox.Text = selectedCustomer.Name;
             customerPhoneTxtbox.Text = selectedCustomer.Phone;
-            customerEmailTxtbox.Text = selectedCustomer.Email;  
+            customerEmailTxtbox.Text = selectedCustomer.Email;
             customerAddressTxtbox.Text = selectedCustomer.Address;
         }
 
@@ -139,10 +141,10 @@ namespace WindowsFormsApp1
         private void customerAddClick(object sender, EventArgs e)
 
         {
-            if(!AllFieldsValidator("WRONG DATA ENTERED")) return;
-            
+            if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
+
             int nextID = CustomersList.Last().ID + 1;
-            if(CustomersList.Any(customer => customer.Name == customerNameTxtbox.Text))
+            if (CustomersList.Any(customer => customer.Name == customerNameTxtbox.Text))
             {
                 Warning(customerWarningLbl, "CUSTOMER ALREADY EXISTS");
                 return;
@@ -153,14 +155,19 @@ namespace WindowsFormsApp1
                 customerPhoneTxtbox.Text,
                 customerEmailTxtbox.Text,
                 customerAddressTxtbox.Text));
-                customerDataGrid.DataSource = null;
-                customerDataGrid.DataSource = CustomersList;
+            customerDataGrid.DataSource = null;
+            customerDataGrid.DataSource = CustomersList;
         }
 
         private void customerUpdateBtn_Click(object sender, EventArgs e)
         {
-            if (!AllFieldsValidator("WRONG DATA ENTERED")) return;
+            if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
             var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
+            if (CustomersList.Where(p => p.Name != selectedCustomer.Name).Any(p => p.Name == customerNameTxtbox.Text))
+            {
+                Warning(customerWarningLbl, "CUSTOMER'S NAME ALREADY EXISTS IN THE LIST");
+                return;
+            }
             string[] values = {
                 Convert.ToString(selectedCustomer.ID),
                 customerNameTxtbox.Text,
@@ -213,13 +220,7 @@ namespace WindowsFormsApp1
 
         private void productNameTxtbox_TextChanged(object sender, EventArgs e)
         {
-            if(productNameTxtbox.Text.Length > 30 || productNameTxtbox.Text.Length == 0)
-            {
-                productNameTxtbox.ForeColor = Color.Red;
-            } else
-            {
-                productNameTxtbox.ForeColor= Color.Black;
-            }
+            
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -229,21 +230,35 @@ namespace WindowsFormsApp1
 
         private void productAddClick(object sender, EventArgs e)
         {
+            if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
             int nextID = ProductsList.Last().Id + 1;
-            ProductsList.Add(new Product(
+            if (ProductsList.Any(product => product.Name == productNameTxtbox.Text))
+            {
+                Warning(productWarningLbl, "PRODUCT ALREADY EXISTS");
+            } else
+            {
+                ProductsList.Add(new Product(
                 nextID,
                 productNameTxtbox.Text,
                 productDescriptionTxtbox.Text,
                 productCategoryTxtbox.Text,
                 Int32.Parse(productQtyTxtbox.Text),
                 Decimal.Parse(productPriceTxtbox.Text)));
+            }
+            
             productDataGrid.DataSource = null;
             productDataGrid.DataSource = ProductsList;
         }
 
         private void productUpdateClick(object sender, EventArgs e)
         {
+            if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
             var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+            if(ProductsList.Where(p => p.Name != selectedProduct.Name).Any(p => p.Name == productNameTxtbox.Text))
+            {
+                Warning(productWarningLbl, "PRODUCT'S NAME ALREADY EXISTS IN THE LIST");
+                return;
+            }
             string[] values = {
                 Convert.ToString(selectedProduct.Id),
                 productNameTxtbox.Text,
@@ -325,35 +340,37 @@ namespace WindowsFormsApp1
             if (selectedOrder.ProductOrderDictionary.ContainsKey(orderProductComboBox.SelectedItem as Product))
             {
                 selectedOrder.ProductOrderDictionary[orderProductComboBox.SelectedItem as Product] = Int32.Parse(orderProductQtyTxtbox.Text);
-            } else
+            }
+            else
             {
                 selectedOrder.ProductOrderDictionary.Add(
                  orderProductComboBox.SelectedItem as Product,
                     Int32.Parse(orderProductQtyTxtbox.Text));
             }
-            
+
             orderGridViewLeft.DataSource = OrdersList;
             orderProductDataGrid_Referesher(selectedOrder);
         }
 
         private void orderProductQtyTxtbox_TextChanged(object sender, EventArgs e)
         {
-           orderPriceTxtboxUpdater();
+            orderPriceTxtboxUpdater();
         }
 
         private void orderPriceTxtboxUpdater()
         {
-            var selectedProductComboBoxPrice = (orderProductComboBox.SelectedItem as Product).Price;
+            var selectedProductComboBox = (orderProductComboBox.SelectedItem as Product);
             var orderProductQtyInput = Int32.TryParse(orderProductQtyTxtbox.Text, out int qty) ? qty : 0;
-            if (orderProductQtyInput == 0)
+            if (orderProductQtyInput == 0 || orderProductQtyInput > selectedProductComboBox.Qty)
             {
                 orderProductQtyTxtbox.ForeColor = Color.Red;
-            } else
+            }
+            else
             {
                 orderProductQtyTxtbox.ForeColor = Color.Black;
             }
             var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : qty;
-            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBoxPrice).ToString();
+            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBox.Price).ToString();
         }
 
         private void orderProductPriceTxtbox_TextChanged(object sender, EventArgs e)
@@ -361,7 +378,8 @@ namespace WindowsFormsApp1
             if (Decimal.TryParse(orderProductPriceTxtbox.Text, out decimal converted) == false)
             {
                 orderProductPriceTxtbox.Text = (0.00).ToString();
-            } else
+            }
+            else
             {
                 orderProductPriceTxtbox.Text = converted.ToString();
             }
@@ -370,6 +388,7 @@ namespace WindowsFormsApp1
         private void orderProductComboBoxChangePriceTextboxUpdate(object sender, EventArgs e)
         {
             orderPriceTxtboxUpdater();
+            orderProductLbl.Text = "Product: " + (orderProductComboBox.SelectedItem as Product).Qty.ToString() + " available";
         }
 
         private void orderProductDataGrid_Referesher(Order selectedOrder)
@@ -384,7 +403,7 @@ namespace WindowsFormsApp1
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void label2_Click_5(object sender, EventArgs e)
@@ -430,18 +449,17 @@ namespace WindowsFormsApp1
 
         private void customerPhoneTxtbox_TextChanged(object sender, EventArgs e)
         {
-            customerPhoneTxtbox.ForeColor = Int32.TryParse(customerPhoneTxtbox.Text, out int phoneNumber) ? 
-                Color.Black : Color.Red; 
+            NumberTxtboxValidator(integerO, customerPhoneTxtbox);
         }
 
         private void customerEmailTxtbox_TextChanged(object sender, EventArgs e)
         {
-            customerEmailTxtbox.ForeColor = (customerEmailTxtbox.Text.Contains('@')) ? 
-                Color.Black : Color.Red;  
+            customerEmailTxtbox.ForeColor = (customerEmailTxtbox.Text.Contains('@')) ?
+                Color.Black : Color.Red;
         }
 
-        
-        private bool AllFieldsValidator(string comment)
+
+        private bool CustomerAllFieldsValidator(string comment)
         {
             if ((customerNameTxtbox.ForeColor == Color.Red ||
             customerPhoneTxtbox.ForeColor == Color.Red ||
@@ -456,7 +474,21 @@ namespace WindowsFormsApp1
             }
             return true;
         }
-         
+
+        private bool ProductAllFieldsValidator(string comment)
+        {
+            if (productNameTxtbox.ForeColor == Color.Red ||
+            productCategoryTxtbox.ForeColor == Color.Red ||
+            productQtyTxtbox.ForeColor == Color.Red ||
+            productPriceTxtbox.ForeColor == Color.Red ||
+            productDescriptionTxtbox.ForeColor == Color.Red)
+            {
+                Warning(productWarningLbl, comment);
+                return false;
+            }
+            return true;
+        }
+
         private void Warning(Label label, string message)
         {
             label.ForeColor = Color.Red;
@@ -465,9 +497,74 @@ namespace WindowsFormsApp1
             label.ForeColor = Color.Black;
             label.Text = "nothing, change later";
         }
+
+        private void productNameTxtbox_TextChanged_1(object sender, EventArgs e)
+        {
+            MaxCharactersPerTxtboxSetter(productNameTxtbox, 20);
+        }
+
+        private void customerNameTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            MaxCharactersPerTxtboxSetter(customerNameTxtbox, 20);
+        }
+
+        private void productCategoryTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            MaxCharactersPerTxtboxSetter(productCategoryTxtbox, 14);
+        }
+
+        private void MaxCharactersPerTxtboxSetter(TextBox textbox, int maxCharactersPerTxtbox)
+        {
+            if (textbox.Text.Length > maxCharactersPerTxtbox || textbox.Text.Length == 0)
+            {
+                textbox.ForeColor = Color.Red;
+            }
+            else
+            {
+                textbox.ForeColor = Color.Black;
+            }
+        }
+
+        private void productQtyTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            NumberTxtboxValidator(integerO, productQtyTxtbox);
+        }
+
+        private void productPriceTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            NumberTxtboxValidator(decimalO, productPriceTxtbox);
+        }
+
+        private void NumberTxtboxValidator(IConvertible number, TextBox textbox)
+        {
+            decimal dec = 1.1m;
+            int integer = 1;
+
+            if (number.GetType() == dec.GetType())
+            {
+                textbox.ForeColor = (
+                    Decimal.TryParse(textbox.Text, out decimal any) ||
+                    textbox.Text.Length == 0) ?
+                    Color.Black : Color.Red;
+            } else if (number.GetType() == integer.GetType())
+            {
+                textbox.ForeColor = (
+                    Int32.TryParse(textbox.Text, out int any) ||
+                    textbox.Text.Length == 0) ?
+                    Color.Black : Color.Red;
+            }
+
+        }
+
+
+        private void productDescriptionTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            MaxCharactersPerTxtboxSetter(productDescriptionTxtbox, 300);
+        }
+        
+
+
+
+
     }
-
-    
-
-    
 }

@@ -33,6 +33,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.customersPanel = new System.Windows.Forms.Panel();
+            this.customerNameTxtbox = new System.Windows.Forms.TextBox();
+            this.customerWarningLbl = new System.Windows.Forms.Label();
             this.customerDeleteBtn = new System.Windows.Forms.Button();
             this.customerAddBtn = new System.Windows.Forms.Button();
             this.customerUpdateBtn = new System.Windows.Forms.Button();
@@ -42,18 +44,18 @@
             this.customerPhoneLbl = new System.Windows.Forms.Label();
             this.customerEmailTxtbox = new System.Windows.Forms.TextBox();
             this.customerPhoneTxtbox = new System.Windows.Forms.TextBox();
-            this.customerNameTxtbox = new System.Windows.Forms.TextBox();
             this.customerNameLbl = new System.Windows.Forms.Label();
             this.customerDataGrid = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.productWarningLbl = new System.Windows.Forms.Label();
+            this.productDescriptionTxtbox = new System.Windows.Forms.TextBox();
             this.productPriceTxtbox = new System.Windows.Forms.TextBox();
             this.productQtyTxtbox = new System.Windows.Forms.TextBox();
             this.productDeleteBtn = new System.Windows.Forms.Button();
             this.productUpdateBtn = new System.Windows.Forms.Button();
             this.productAddBtn = new System.Windows.Forms.Button();
             this.productCategoryTxtbox = new System.Windows.Forms.TextBox();
-            this.productDescriptionTxtbox = new System.Windows.Forms.TextBox();
             this.productNameTxtbox = new System.Windows.Forms.TextBox();
             this.productPriceLbl = new System.Windows.Forms.Label();
             this.productQtyLbl = new System.Windows.Forms.Label();
@@ -95,7 +97,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customerWarningLbl = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -177,6 +178,7 @@
             // customersPanel
             // 
             this.customersPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.customersPanel.Controls.Add(this.customerNameTxtbox);
             this.customersPanel.Controls.Add(this.customerWarningLbl);
             this.customersPanel.Controls.Add(this.customerDeleteBtn);
             this.customersPanel.Controls.Add(this.customerAddBtn);
@@ -187,7 +189,6 @@
             this.customersPanel.Controls.Add(this.customerPhoneLbl);
             this.customersPanel.Controls.Add(this.customerEmailTxtbox);
             this.customersPanel.Controls.Add(this.customerPhoneTxtbox);
-            this.customersPanel.Controls.Add(this.customerNameTxtbox);
             this.customersPanel.Controls.Add(this.customerNameLbl);
             this.customersPanel.Controls.Add(this.customerDataGrid);
             this.customersPanel.Location = new System.Drawing.Point(-4, 0);
@@ -195,6 +196,24 @@
             this.customersPanel.Size = new System.Drawing.Size(820, 518);
             this.customersPanel.TabIndex = 0;
             this.customersPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.customersPanel_Paint);
+            // 
+            // customerNameTxtbox
+            // 
+            this.customerNameTxtbox.Location = new System.Drawing.Point(30, 38);
+            this.customerNameTxtbox.Name = "customerNameTxtbox";
+            this.customerNameTxtbox.Size = new System.Drawing.Size(140, 20);
+            this.customerNameTxtbox.TabIndex = 9;
+            this.customerNameTxtbox.Text = "123";
+            this.customerNameTxtbox.TextChanged += new System.EventHandler(this.customerNameTxtbox_TextChanged);
+            // 
+            // customerWarningLbl
+            // 
+            this.customerWarningLbl.AutoSize = true;
+            this.customerWarningLbl.Location = new System.Drawing.Point(181, 72);
+            this.customerWarningLbl.Name = "customerWarningLbl";
+            this.customerWarningLbl.Size = new System.Drawing.Size(35, 13);
+            this.customerWarningLbl.TabIndex = 8;
+            this.customerWarningLbl.Text = "label3";
             // 
             // customerDeleteBtn
             // 
@@ -278,15 +297,6 @@
             this.customerPhoneTxtbox.TabIndex = 3;
             this.customerPhoneTxtbox.TextChanged += new System.EventHandler(this.customerPhoneTxtbox_TextChanged);
             // 
-            // customerNameTxtbox
-            // 
-            this.customerNameTxtbox.Location = new System.Drawing.Point(30, 39);
-            this.customerNameTxtbox.Name = "customerNameTxtbox";
-            this.customerNameTxtbox.Size = new System.Drawing.Size(127, 20);
-            this.customerNameTxtbox.TabIndex = 3;
-            this.customerNameTxtbox.Text = "sasa";
-            this.customerNameTxtbox.TextChanged += new System.EventHandler(this.productNameTxtbox_TextChanged);
-            // 
             // customerNameLbl
             // 
             this.customerNameLbl.AutoSize = true;
@@ -332,13 +342,14 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel2.Controls.Add(this.productWarningLbl);
+            this.panel2.Controls.Add(this.productDescriptionTxtbox);
             this.panel2.Controls.Add(this.productPriceTxtbox);
             this.panel2.Controls.Add(this.productQtyTxtbox);
             this.panel2.Controls.Add(this.productDeleteBtn);
             this.panel2.Controls.Add(this.productUpdateBtn);
             this.panel2.Controls.Add(this.productAddBtn);
             this.panel2.Controls.Add(this.productCategoryTxtbox);
-            this.panel2.Controls.Add(this.productDescriptionTxtbox);
             this.panel2.Controls.Add(this.productNameTxtbox);
             this.panel2.Controls.Add(this.productPriceLbl);
             this.panel2.Controls.Add(this.productQtyLbl);
@@ -351,12 +362,30 @@
             this.panel2.Size = new System.Drawing.Size(826, 507);
             this.panel2.TabIndex = 0;
             // 
+            // productWarningLbl
+            // 
+            this.productWarningLbl.AutoSize = true;
+            this.productWarningLbl.Location = new System.Drawing.Point(211, 59);
+            this.productWarningLbl.Name = "productWarningLbl";
+            this.productWarningLbl.Size = new System.Drawing.Size(35, 13);
+            this.productWarningLbl.TabIndex = 9;
+            this.productWarningLbl.Text = "label3";
+            // 
+            // productDescriptionTxtbox
+            // 
+            this.productDescriptionTxtbox.Location = new System.Drawing.Point(25, 90);
+            this.productDescriptionTxtbox.Name = "productDescriptionTxtbox";
+            this.productDescriptionTxtbox.Size = new System.Drawing.Size(724, 20);
+            this.productDescriptionTxtbox.TabIndex = 8;
+            this.productDescriptionTxtbox.TextChanged += new System.EventHandler(this.productDescriptionTxtbox_TextChanged);
+            // 
             // productPriceTxtbox
             // 
             this.productPriceTxtbox.Location = new System.Drawing.Point(590, 32);
             this.productPriceTxtbox.Name = "productPriceTxtbox";
             this.productPriceTxtbox.Size = new System.Drawing.Size(159, 20);
             this.productPriceTxtbox.TabIndex = 2;
+            this.productPriceTxtbox.TextChanged += new System.EventHandler(this.productPriceTxtbox_TextChanged);
             // 
             // productQtyTxtbox
             // 
@@ -364,6 +393,7 @@
             this.productQtyTxtbox.Name = "productQtyTxtbox";
             this.productQtyTxtbox.Size = new System.Drawing.Size(159, 20);
             this.productQtyTxtbox.TabIndex = 2;
+            this.productQtyTxtbox.TextChanged += new System.EventHandler(this.productQtyTxtbox_TextChanged);
             // 
             // productDeleteBtn
             // 
@@ -402,14 +432,7 @@
             this.productCategoryTxtbox.Name = "productCategoryTxtbox";
             this.productCategoryTxtbox.Size = new System.Drawing.Size(159, 20);
             this.productCategoryTxtbox.TabIndex = 2;
-            // 
-            // productDescriptionTxtbox
-            // 
-            this.productDescriptionTxtbox.Location = new System.Drawing.Point(25, 90);
-            this.productDescriptionTxtbox.Name = "productDescriptionTxtbox";
-            this.productDescriptionTxtbox.Size = new System.Drawing.Size(724, 20);
-            this.productDescriptionTxtbox.TabIndex = 2;
-            this.productDescriptionTxtbox.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.productCategoryTxtbox.TextChanged += new System.EventHandler(this.productCategoryTxtbox_TextChanged);
             // 
             // productNameTxtbox
             // 
@@ -417,6 +440,7 @@
             this.productNameTxtbox.Name = "productNameTxtbox";
             this.productNameTxtbox.Size = new System.Drawing.Size(159, 20);
             this.productNameTxtbox.TabIndex = 2;
+            this.productNameTxtbox.TextChanged += new System.EventHandler(this.productNameTxtbox_TextChanged_1);
             // 
             // productPriceLbl
             // 
@@ -433,9 +457,9 @@
             this.productQtyLbl.AutoSize = true;
             this.productQtyLbl.Location = new System.Drawing.Point(400, 16);
             this.productQtyLbl.Name = "productQtyLbl";
-            this.productQtyLbl.Size = new System.Drawing.Size(46, 13);
+            this.productQtyLbl.Size = new System.Drawing.Size(80, 13);
             this.productQtyLbl.TabIndex = 1;
-            this.productQtyLbl.Text = "Quantity";
+            this.productQtyLbl.Text = "Stock available";
             this.productQtyLbl.Click += new System.EventHandler(this.label4_Click);
             // 
             // productCategoryLbl
@@ -720,7 +744,7 @@
             // orderProductLbl
             // 
             this.orderProductLbl.AutoSize = true;
-            this.orderProductLbl.Location = new System.Drawing.Point(453, 23);
+            this.orderProductLbl.Location = new System.Drawing.Point(393, 23);
             this.orderProductLbl.Name = "orderProductLbl";
             this.orderProductLbl.Size = new System.Drawing.Size(44, 13);
             this.orderProductLbl.TabIndex = 2;
@@ -749,6 +773,7 @@
             this.orderProductDataGrid.DataSource = this.productBindingSource2;
             this.orderProductDataGrid.Location = new System.Drawing.Point(357, 185);
             this.orderProductDataGrid.Name = "orderProductDataGrid";
+            this.orderProductDataGrid.ReadOnly = true;
             this.orderProductDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderProductDataGrid.Size = new System.Drawing.Size(462, 316);
             this.orderProductDataGrid.TabIndex = 1;
@@ -765,6 +790,7 @@
             this.orderGridViewLeft.DataSource = this.orderBindingSource1;
             this.orderGridViewLeft.Location = new System.Drawing.Point(6, 185);
             this.orderGridViewLeft.Name = "orderGridViewLeft";
+            this.orderGridViewLeft.ReadOnly = true;
             this.orderGridViewLeft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.orderGridViewLeft.Size = new System.Drawing.Size(345, 316);
             this.orderGridViewLeft.TabIndex = 0;
@@ -819,15 +845,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Stock Manager App";
             // 
-            // customerWarningLbl
-            // 
-            this.customerWarningLbl.AutoSize = true;
-            this.customerWarningLbl.Location = new System.Drawing.Point(181, 72);
-            this.customerWarningLbl.Name = "customerWarningLbl";
-            this.customerWarningLbl.Size = new System.Drawing.Size(35, 13);
-            this.customerWarningLbl.TabIndex = 8;
-            this.customerWarningLbl.Text = "label3";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
@@ -871,42 +888,49 @@
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Name";
             this.dataGridViewTextBoxColumn6.HeaderText = "Name";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
             this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // categoryDataGridViewTextBoxColumn
             // 
             this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
             this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
             this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
+            this.categoryDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // priceDataGridViewTextBoxColumn1
             // 
             this.priceDataGridViewTextBoxColumn1.DataPropertyName = "Price";
             this.priceDataGridViewTextBoxColumn1.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn1.Name = "priceDataGridViewTextBoxColumn1";
+            this.priceDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dateCreatedDataGridViewTextBoxColumn
             // 
             this.dateCreatedDataGridViewTextBoxColumn.DataPropertyName = "DateCreated";
             this.dateCreatedDataGridViewTextBoxColumn.HeaderText = "DateCreated";
             this.dateCreatedDataGridViewTextBoxColumn.Name = "dateCreatedDataGridViewTextBoxColumn";
+            this.dateCreatedDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // byCustomerDataGridViewTextBoxColumn
             // 
             this.byCustomerDataGridViewTextBoxColumn.DataPropertyName = "ByCustomer";
             this.byCustomerDataGridViewTextBoxColumn.HeaderText = "ByCustomer";
             this.byCustomerDataGridViewTextBoxColumn.Name = "byCustomerDataGridViewTextBoxColumn";
+            this.byCustomerDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // priceDataGridViewTextBoxColumn
             // 
             this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
             this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // orderBindingSource1
             // 
@@ -991,7 +1015,6 @@
         private System.Windows.Forms.Label customerPhoneLbl;
         private System.Windows.Forms.TextBox customerEmailTxtbox;
         private System.Windows.Forms.TextBox customerPhoneTxtbox;
-        private System.Windows.Forms.TextBox customerNameTxtbox;
         private System.Windows.Forms.Label customerNameLbl;
         private System.Windows.Forms.DataGridView customerDataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1007,7 +1030,6 @@
         private System.Windows.Forms.TextBox productPriceTxtbox;
         private System.Windows.Forms.TextBox productQtyTxtbox;
         private System.Windows.Forms.TextBox productCategoryTxtbox;
-        private System.Windows.Forms.TextBox productDescriptionTxtbox;
         private System.Windows.Forms.TextBox productNameTxtbox;
         private System.Windows.Forms.Label productPriceLbl;
         private System.Windows.Forms.Label productQtyLbl;
@@ -1056,6 +1078,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label orderProductQtyWarningLbl;
         private System.Windows.Forms.Label customerWarningLbl;
+        private System.Windows.Forms.TextBox customerNameTxtbox;
+        private System.Windows.Forms.TextBox productDescriptionTxtbox;
+        private System.Windows.Forms.Label productWarningLbl;
     }
 }
 
