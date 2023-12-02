@@ -45,12 +45,12 @@ namespace WindowsFormsApp1
         private List<Order> GetOrders()
         {
             List<Order> newOrdersList = new List<Order>();
-            newOrdersList.Add(new Order(1, new Dictionary<Product, int>()
+            newOrdersList.Add(new Order(new Dictionary<Product, int>()
             {
                 { ProductsList[1], 12 },
                 { ProductsList[2], 13 }
             }, DateTime.Now, CustomersList[0]));
-            newOrdersList.Add(new Order(2, new Dictionary<Product, int>()
+            newOrdersList.Add(new Order(new Dictionary<Product, int>()
             {
                 { ProductsList[3], 123 },
                 { ProductsList[4], 133 }
@@ -62,21 +62,21 @@ namespace WindowsFormsApp1
         private List<Product> GetProducts()
         {
             List<Product> newProductsList = new List<Product>();
-            newProductsList.Add(new Product(1, "Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
-            newProductsList.Add(new Product(2, "Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
-            newProductsList.Add(new Product(3, "Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
-            newProductsList.Add(new Product(4, "Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
-            newProductsList.Add(new Product(5, "PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
-            newProductsList.Add(new Product(6, "Notepad", "200 pages, lines, hardback", "Office", 1123, 5.99m));
+            newProductsList.Add(new Product("Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
+            newProductsList.Add(new Product("Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
+            newProductsList.Add(new Product("Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
+            newProductsList.Add(new Product("Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
+            newProductsList.Add(new Product("PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
+            newProductsList.Add(new Product("Notepad", "200 pages, lines, hardback", "Office", 1123, 5.99m));
             return newProductsList;
         }
 
         private List<Customer> GetCustomers()
         {
             List<Customer> newCustomersList = new List<Customer>();
-            newCustomersList.Add(new Customer(101, "Frames Ltd", "07456546456", "13 Barnsley Road, WF92LD, Pontefract", "frames@gmail.com"));
-            newCustomersList.Add(new Customer(102, "Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
-            newCustomersList.Add(new Customer(103, "Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com")
+            newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road, WF92LD, Pontefract", "frames@gmail.com"));
+            newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
+            newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com")
             {
 
             });
@@ -143,14 +143,12 @@ namespace WindowsFormsApp1
         {
             if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
 
-            int nextID = CustomersList.Last().ID + 1;
             if (CustomersList.Any(customer => customer.Name == customerNameTxtbox.Text))
             {
                 Warning(customerWarningLbl, "CUSTOMER ALREADY EXISTS");
                 return;
             }
             CustomersList.Add(new Customer(
-                nextID,
                 customerNameTxtbox.Text,
                 customerPhoneTxtbox.Text,
                 customerEmailTxtbox.Text,
@@ -169,7 +167,6 @@ namespace WindowsFormsApp1
                 return;
             }
             string[] values = {
-                Convert.ToString(selectedCustomer.ID),
                 customerNameTxtbox.Text,
                 customerPhoneTxtbox.Text,
                 customerEmailTxtbox.Text,
@@ -231,14 +228,12 @@ namespace WindowsFormsApp1
         private void productAddClick(object sender, EventArgs e)
         {
             if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
-            int nextID = ProductsList.Last().Id + 1;
             if (ProductsList.Any(product => product.Name == productNameTxtbox.Text))
             {
                 Warning(productWarningLbl, "PRODUCT ALREADY EXISTS");
             } else
             {
                 ProductsList.Add(new Product(
-                nextID,
                 productNameTxtbox.Text,
                 productDescriptionTxtbox.Text,
                 productCategoryTxtbox.Text,
@@ -260,7 +255,6 @@ namespace WindowsFormsApp1
                 return;
             }
             string[] values = {
-                Convert.ToString(selectedProduct.Id),
                 productNameTxtbox.Text,
                 productDescriptionTxtbox.Text,
                 productCategoryTxtbox.Text,
@@ -561,9 +555,9 @@ namespace WindowsFormsApp1
         {
             MaxCharactersPerTxtboxSetter(productDescriptionTxtbox, 300);
         }
+
+
         
-
-
 
 
     }
