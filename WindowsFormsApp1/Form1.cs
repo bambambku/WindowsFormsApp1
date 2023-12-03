@@ -12,7 +12,6 @@ using System.Reflection;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using System.IO;
 using System.Runtime.InteropServices;
 
 namespace WindowsFormsApp1
@@ -49,48 +48,48 @@ namespace WindowsFormsApp1
 
         private List<Order> GetOrders(string path)
         {
-            //Order handler = new Order(null, DateTime.Now, null);
-            //return ReadOrdersList(path, handler);
-            List<Order> newOrdersList = new List<Order>();
-            newOrdersList.Add(new Order(new Dictionary<Product, int>()
-            {
-                { ProductsList[1], 12 },
-                { ProductsList[2], 13 }
-            }, DateTime.Now, CustomersList[0]));
-            newOrdersList.Add(new Order(new Dictionary<Product, int>()
-            {
-                { ProductsList[3], 123 },
-                { ProductsList[4], 133 }
-            }, DateTime.Now, CustomersList[2]));
-            return newOrdersList;
+            Order handler = new Order(null, DateTime.Now, null);
+            return ReadOrdersList(path, handler);
+            //List<Order> newOrdersList = new List<Order>();
+            //newOrdersList.Add(new Order(new Dictionary<Product, int>()
+            //{
+            //    { ProductsList[1], 12 },
+            //    { ProductsList[2], 13 }
+            //}, DateTime.Now, CustomersList[0]));
+            //newOrdersList.Add(new Order(new Dictionary<Product, int>()
+            //{
+            //    { ProductsList[3], 123 },
+            //    { ProductsList[4], 133 }
+            //}, DateTime.Now, CustomersList[2]));
+            //return newOrdersList;
 
         }
 
         private List<Product> GetProducts(string path)
         {
-            //Product handler = new Product("", "", "", 0, 0);
-            //return ReadProductsList(path, handler);
-            List<Product> newProductsList = new List<Product>();
-            newProductsList.Add(new Product("Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
-            newProductsList.Add(new Product("Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
-            newProductsList.Add(new Product("Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
-            newProductsList.Add(new Product("Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
-            newProductsList.Add(new Product("PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
-            newProductsList.Add(new Product("Notepad", "200 page, line, hardback", "Office", 1123, 5.99m));
-            return newProductsList;
+            Product handler = new Product("", "", "", 0, 0);
+            return ReadProductsList(path, handler);
+            //List<Product> newProductsList = new List<Product>();
+            //newProductsList.Add(new Product("Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
+            //newProductsList.Add(new Product("Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
+            //newProductsList.Add(new Product("Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
+            //newProductsList.Add(new Product("Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
+            //newProductsList.Add(new Product("PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
+            //newProductsList.Add(new Product("Notepad", "200 page, line, hardback", "Office", 1123, 5.99m));
+            //return newProductsList;
         }
 
         private List<Customer> GetCustomers(string path)
         {
-            //Customer handler = new Customer("", "", "", "");
-            //return ReadCustomersList(path, handler);
+            Customer handler = new Customer("", "", "", "");
+            return ReadCustomersList(path, handler);
 
-            List<Customer> newCustomersList = new List<Customer>();
-            newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road WF92LD Pontefract", "frames@gmail.com"));
-            newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent LS113LS Leeds", "barabash@gmail.com"));
-            newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill WF32LP Stanley", "galagan@outlook.com"));
+            //List<Customer> newCustomersList = new List<Customer>();
+            //newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road WF92LD Pontefract", "frames@gmail.com"));
+            //newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent LS113LS Leeds", "barabash@gmail.com"));
+            //newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill WF32LP Stanley", "galagan@outlook.com"));
             
-            return newCustomersList;
+            //return newCustomersList;
         }
 
 
@@ -460,6 +459,7 @@ namespace WindowsFormsApp1
         {
             customerEmailTxtbox.ForeColor = (customerEmailTxtbox.Text.Contains('@')) ?
                 Color.Black : Color.Red;
+            if (customerEmailTxtbox.Text.Contains(',')) customerEmailTxtbox.ForeColor = Color.Red;
         }
 
 
@@ -505,16 +505,19 @@ namespace WindowsFormsApp1
         private void productNameTxtbox_TextChanged_1(object sender, EventArgs e)
         {
             MaxCharactersPerTxtboxSetter(productNameTxtbox, 20);
+            if (productNameTxtbox.Text.Contains(',')) productNameTxtbox.ForeColor = Color.Red;
         }
 
         private void customerNameTxtbox_TextChanged(object sender, EventArgs e)
         {
             MaxCharactersPerTxtboxSetter(customerNameTxtbox, 20);
+            if (customerNameTxtbox.Text.Contains(',')) customerNameTxtbox.ForeColor = Color.Red;
         }
 
         private void productCategoryTxtbox_TextChanged(object sender, EventArgs e)
         {
             MaxCharactersPerTxtboxSetter(productCategoryTxtbox, 14);
+            if (productCategoryTxtbox.Text.Contains(',')) productCategoryTxtbox.ForeColor = Color.Red;
         }
 
         private void MaxCharactersPerTxtboxSetter(TextBox textbox, int maxCharactersPerTxtbox)
@@ -564,6 +567,7 @@ namespace WindowsFormsApp1
         private void productDescriptionTxtbox_TextChanged(object sender, EventArgs e)
         {
             MaxCharactersPerTxtboxSetter(productDescriptionTxtbox, 300);
+            if (productDescriptionTxtbox.Text.Contains(',')) productDescriptionTxtbox.ForeColor = Color.Red;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -573,9 +577,9 @@ namespace WindowsFormsApp1
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //SaveCustomers(CustomersList, CustomersPath);
-            //SaveProducts(ProductsList, ProductsPath);
-            //SaveOrders(OrdersList, OrdersPath);
+            SaveCustomers(CustomersList, CustomersPath);
+            SaveProducts(ProductsList, ProductsPath);
+            SaveOrders(OrdersList, OrdersPath);
             //SaveList(CustomersList, CustomersPath);
         }
 
@@ -673,6 +677,33 @@ namespace WindowsFormsApp1
         private void saveCustomersBtn_Click(object sender, EventArgs e)
         {
             SaveCustomers(CustomersList, CustomersPath);
+        }
+
+        private void orderCustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void orderUpdateBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customerAddressTxtbox_TextChanged(object sender, EventArgs e)
+        {
+            if (customerAddressTxtbox.Text.Contains(',')) customerAddressTxtbox.ForeColor = Color.Red;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            SaveCustomers(CustomersList, CustomersPath);
+            SaveProducts(ProductsList, ProductsPath);
+            SaveOrders(OrdersList, OrdersPath);
         }
     }
 }

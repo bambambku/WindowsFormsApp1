@@ -30,17 +30,6 @@ namespace WindowsFormsApp1
         T FromCSVString(string CSVstring);
     }
 
-    public class CustomerList
-    {
-        public List<Customer> List { get; set; }
-
-        public void AddCustomer(string name, string phone, string address, string email)
-        {
-
-            List.Add(new Customer(name, phone, address, email));
-        }
-    }
-
     public class Product : ICSVable<Product>
     {
         public string Name { get; set; }
@@ -94,27 +83,24 @@ namespace WindowsFormsApp1
             ProductOrderDictionary = productOrderDictionary;
             DateCreated = datecreated;
             ByCustomer = byCustomer;
+            Price = GetPrice(productOrderDictionary);
+        }
+
+        public decimal GetPrice(Dictionary<Product, int> productOrderDictionary)
+        {
             decimal price = 0;
             if (productOrderDictionary == null)
             {
-                Price = 0;
-            } else
+                price = 0;
+            }
+            else
             {
                 foreach (var kvp in productOrderDictionary)
                 {
                     price += kvp.Key.Price * kvp.Value;
                 }
-                Price = price;
             }
-            
-        }
-
-        public Order(Dictionary<Product, int> productOrderDictionary, DateTime dateCreated, Customer byCustomer, decimal price)
-        {
-            ProductOrderDictionary = productOrderDictionary;
-            DateCreated = dateCreated;
-            ByCustomer = byCustomer;
-            Price = price;
+            return price;
         }
 
         public string ProductsToString(List<Product> productList)
@@ -198,7 +184,7 @@ namespace WindowsFormsApp1
 
         public override string ToString()
         {
-            return null;
+            return Name;
         }
 
         public string ToCSVString()
