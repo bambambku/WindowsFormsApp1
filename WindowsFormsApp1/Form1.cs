@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace WindowsFormsApp1
 {
@@ -27,12 +29,15 @@ namespace WindowsFormsApp1
         public List<Order> OrdersList { get; set; }
         public int integerO = 1;
         public decimal decimalO = 1.1m;
+        public string CustomersPath = "customersListCSV.txt";
+        public string ProductsPath = "productsListCSV.txt";
+        public string OrdersPath = "ordersListCSV.txt";
         public Form1()
         {
-            CustomersList = GetCustomers();
+            CustomersList = GetCustomers(CustomersPath);
 
-            ProductsList = GetProducts();
-            OrdersList = GetOrders();
+            ProductsList = GetProducts(ProductsPath);
+            OrdersList = GetOrders(OrdersPath);
 
             InitializeComponent();
             customerDataGrid.DataSource = CustomersList;
@@ -42,8 +47,10 @@ namespace WindowsFormsApp1
             orderCustomerComboBox.DataSource = CustomersList;
         }
 
-        private List<Order> GetOrders()
+        private List<Order> GetOrders(string path)
         {
+            //Order handler = new Order(null, DateTime.Now, null);
+            //return ReadOrdersList(path, handler);
             List<Order> newOrdersList = new List<Order>();
             newOrdersList.Add(new Order(new Dictionary<Product, int>()
             {
@@ -59,27 +66,30 @@ namespace WindowsFormsApp1
 
         }
 
-        private List<Product> GetProducts()
+        private List<Product> GetProducts(string path)
         {
+            //Product handler = new Product("", "", "", 0, 0);
+            //return ReadProductsList(path, handler);
             List<Product> newProductsList = new List<Product>();
             newProductsList.Add(new Product("Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
             newProductsList.Add(new Product("Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
             newProductsList.Add(new Product("Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
             newProductsList.Add(new Product("Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
             newProductsList.Add(new Product("PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
-            newProductsList.Add(new Product("Notepad", "200 pages, lines, hardback", "Office", 1123, 5.99m));
+            newProductsList.Add(new Product("Notepad", "200 page, line, hardback", "Office", 1123, 5.99m));
             return newProductsList;
         }
 
-        private List<Customer> GetCustomers()
+        private List<Customer> GetCustomers(string path)
         {
-            List<Customer> newCustomersList = new List<Customer>();
-            newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road, WF92LD, Pontefract", "frames@gmail.com"));
-            newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent, LS113LS, Leeds", "barabash@gmail.com"));
-            newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill, WF32LP, Stanley", "galagan@outlook.com")
-            {
+            //Customer handler = new Customer("", "", "", "");
+            //return ReadCustomersList(path, handler);
 
-            });
+            List<Customer> newCustomersList = new List<Customer>();
+            newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road WF92LD Pontefract", "frames@gmail.com"));
+            newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent LS113LS Leeds", "barabash@gmail.com"));
+            newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill WF32LP Stanley", "galagan@outlook.com"));
+            
             return newCustomersList;
         }
 
@@ -556,9 +566,113 @@ namespace WindowsFormsApp1
             MaxCharactersPerTxtboxSetter(productDescriptionTxtbox, 300);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //SaveCustomers(CustomersList, CustomersPath);
+            //SaveProducts(ProductsList, ProductsPath);
+            //SaveOrders(OrdersList, OrdersPath);
+            //SaveList(CustomersList, CustomersPath);
+        }
+
+        private void SaveList(List<ICSVable<object>> list, string path)
+        {
+            string newData = "";
+            foreach (var item in list)
+            {
+                string itemData = item.ToCSVString();
+                newData += $"{itemData}\n";
+            }
+            CSVHandler.Write(path, newData);
+        }
+
+
+        private void SaveCustomers(List<Customer> customerList,  string customersPath)
+        {
+            string newData = "";
+            foreach (Customer item in customerList)
+            {
+                string itemData = item.ToCSVString();
+                newData += $"{itemData}\n";
+            }
+            CSVHandler.Write(customersPath, newData);
+        }
+
+        private void SaveProducts(List<Product> productsList, string productsPath)
+        {
+            string newData = "";
+            foreach (Product item in productsList)
+            {
+                string itemData = item.ToCSVString();
+                newData += $"{itemData}\n";
+            }
+            CSVHandler.Write(productsPath, newData);
+        }
+
+        private void SaveOrders(List<Order> ordersList, string ordersPath)
+        {
+            string newData = "";
+            foreach (Order item in ordersList)
+            {
+                string itemData = item.ToCSVString(ProductsList, CustomersList);
+                newData += $"{itemData}\n";
+            }
+            CSVHandler.Write(ordersPath, newData);
+        }
         
+        
+        private List<object> ReadList(string path, ICSVable<object> handler)
+        {
+            List<object> CSVableList = new List<object>();
+            List<string> list = CSVHandler.Read(path);
+            foreach (var item in list)
+            {
+                CSVableList.Add(handler.FromCSVString(item));
+            }
+            return CSVableList;
+        }
+
+        private List<Customer> ReadCustomersList(string path, Customer handler)
+        {
+            List<Customer> CSVableList = new List<Customer>();
+            List<string> list = CSVHandler.Read(path);
+            foreach (var item in list)
+            {
+                CSVableList.Add(handler.FromCSVString(item));
+            }
+            return CSVableList;
+        }
+
+        private List<Product> ReadProductsList(string path, Product handler)
+        {
+            List<Product> CSVableList = new List<Product>();
+            List<string> list = CSVHandler.Read(path);
+            foreach (var item in list)
+            {
+                CSVableList.Add(handler.FromCSVString(item));
+            }
+            return CSVableList;
+        }
+
+        private List<Order> ReadOrdersList(string path, Order handler)
+        {
+            List<Order> CSVableList = new List<Order>();
+            List<string> list = CSVHandler.Read(path);
+            foreach (var item in list)
+            {
+                CSVableList.Add(handler.FromCSVString(item, ProductsList, CustomersList));
+            }
+            return CSVableList;
+        }
 
 
+        private void saveCustomersBtn_Click(object sender, EventArgs e)
+        {
+            SaveCustomers(CustomersList, CustomersPath);
+        }
     }
 }

@@ -116,6 +116,7 @@
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.saveCustomersBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -178,6 +179,7 @@
             // customersPanel
             // 
             this.customersPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.customersPanel.Controls.Add(this.saveCustomersBtn);
             this.customersPanel.Controls.Add(this.customerNameTxtbox);
             this.customersPanel.Controls.Add(this.customerWarningLbl);
             this.customersPanel.Controls.Add(this.customerDeleteBtn);
@@ -952,6 +954,16 @@
             // 
             this.orderBindingSource.DataSource = typeof(WindowsFormsApp1.Order);
             // 
+            // saveCustomersBtn
+            // 
+            this.saveCustomersBtn.Location = new System.Drawing.Point(629, 87);
+            this.saveCustomersBtn.Name = "saveCustomersBtn";
+            this.saveCustomersBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveCustomersBtn.TabIndex = 10;
+            this.saveCustomersBtn.Text = "button4";
+            this.saveCustomersBtn.UseVisualStyleBackColor = true;
+            this.saveCustomersBtn.Click += new System.EventHandler(this.saveCustomersBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -960,6 +972,8 @@
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1081,6 +1095,7 @@
         private System.Windows.Forms.TextBox customerNameTxtbox;
         private System.Windows.Forms.TextBox productDescriptionTxtbox;
         private System.Windows.Forms.Label productWarningLbl;
+        private System.Windows.Forms.Button saveCustomersBtn;
     }
 }
 
