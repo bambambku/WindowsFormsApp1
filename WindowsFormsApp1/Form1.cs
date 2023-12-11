@@ -178,8 +178,8 @@ namespace WindowsFormsApp1
             string[] values = {
                 customerNameTxtbox.Text,
                 customerPhoneTxtbox.Text,
-                customerEmailTxtbox.Text,
-                customerAddressTxtbox.Text
+                customerAddressTxtbox.Text,
+                customerEmailTxtbox.Text
             };
             PropertiesHandler.Update(selectedCustomer, values);
             customerDataGrid.DataSource = null;
@@ -314,10 +314,8 @@ namespace WindowsFormsApp1
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
             orderCustomerComboBox.SelectedItem = selectedOrder.ByCustomer;
             orderDateTxtbox.Text = Convert.ToString(selectedOrder.DateCreated);
-            orderPriceTxtbox.Text = selectedOrder.Price.ToString();
+            orderPriceTxtbox.Text = selectedOrder.GetPrice(selectedOrder.ProductOrderDictionary).ToString();
             orderProductDataGrid_Referesher(selectedOrder);
-
-
         }
 
         private void orderProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -340,6 +338,11 @@ namespace WindowsFormsApp1
                 orderProductQtyWarningLbl.Text = "";
                 return;
             }
+            if (selectedOrder.ProductOrderDictionary == null) {
+                selectedOrder.ProductOrderDictionary.Add(
+                 orderProductComboBox.SelectedItem as Product,
+                    Int32.Parse(orderProductQtyTxtbox.Text));
+            }
             if (selectedOrder.ProductOrderDictionary.ContainsKey(orderProductComboBox.SelectedItem as Product))
             {
                 selectedOrder.ProductOrderDictionary[orderProductComboBox.SelectedItem as Product] = Int32.Parse(orderProductQtyTxtbox.Text);
@@ -357,12 +360,13 @@ namespace WindowsFormsApp1
 
         private void orderProductQtyTxtbox_TextChanged(object sender, EventArgs e)
         {
+            orderProductPriceTxtboxUpdater();
             orderPriceTxtboxUpdater();
         }
 
-        private void orderPriceTxtboxUpdater()
+        private void orderProductPriceTxtboxUpdater()
         {
-            var selectedProductComboBox = (orderProductComboBox.SelectedItem as Product);
+            var selectedProductComboBox = orderProductComboBox.SelectedItem as Product;
             var orderProductQtyInput = Int32.TryParse(orderProductQtyTxtbox.Text, out int qty) ? qty : 0;
             if (orderProductQtyInput == 0 || orderProductQtyInput > selectedProductComboBox.Qty)
             {
@@ -374,6 +378,44 @@ namespace WindowsFormsApp1
             }
             var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : qty;
             orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBox.Price).ToString();
+        }
+
+        private void orderPriceTxtboxUpdater()
+        {
+            if (orderGridViewLeft.SelectedRows != null && 
+                orderGridViewLeft.SelectedRows.Count > 0 && 
+                orderProductComboBox.SelectedItem != null)
+            {
+                var selectedOrderComboBox = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+                var selectedProductComboBox = orderProductComboBox.SelectedItem as Product;
+                if (selectedOrderComboBox.ProductOrderDictionary == null)
+                {
+                    orderPriceTxtbox.Text = string.Empty;
+                    return;
+                }
+                bool orderContainsProduct = selectedOrderComboBox.ProductOrderDictionary.ContainsKey(selectedProductComboBox);
+                decimal newOrderPrice = 0.0m;
+                if (!orderContainsProduct)
+                {
+                    newOrderPrice = selectedOrderComboBox.GetPrice(selectedOrderComboBox.ProductOrderDictionary) + decimal.Parse(orderProductPriceTxtbox.Text);
+
+                }
+                else
+                {
+                    foreach (var kpv in selectedOrderComboBox.ProductOrderDictionary)
+                    {
+                        int qty = kpv.Value;
+                        if (kpv.Key == selectedProductComboBox)
+                        {
+                            newOrderPrice += Decimal.Parse(orderProductPriceTxtbox.Text);
+                            continue;
+                        }
+                        newOrderPrice += qty * kpv.Key.Price;
+                    }
+                }
+                orderPriceTxtbox.Text = newOrderPrice.ToString();
+            }
+            
         }
 
         private void orderProductPriceTxtbox_TextChanged(object sender, EventArgs e)
@@ -390,18 +432,35 @@ namespace WindowsFormsApp1
 
         private void orderProductComboBoxChangePriceTextboxUpdate(object sender, EventArgs e)
         {
-            orderPriceTxtboxUpdater();
+            orderProductPriceTxtboxUpdater();
             orderProductLbl.Text = "Product: " + (orderProductComboBox.SelectedItem as Product).Qty.ToString() + " available";
+            if (orderGridViewLeft.SelectedRows != null)
+            {
+                orderPriceTxtboxUpdater();
+            }
         }
 
         private void orderProductDataGrid_Referesher(Order selectedOrder)
         {
             List<Product> orderProductList = new List<Product>();
-            foreach (var orderProduct in selectedOrder.ProductOrderDictionary)
+            if (selectedOrder.ProductOrderDictionary != null)
             {
-                orderProductList.Add(orderProduct.Key);
-            };
-            orderProductDataGrid.DataSource = orderProductList;
+                foreach (var orderProduct in selectedOrder.ProductOrderDictionary)
+                {
+                    orderProductList.Add(orderProduct.Key);
+                };
+                orderProductDataGrid.DataSource = orderProductList;
+                int index = 0;
+                foreach (var kvp in selectedOrder.ProductOrderDictionary)
+                {
+                    orderProductDataGrid[1, index].Value = kvp.Value;
+                    index++;
+                }
+            } else
+            {
+                orderProductDataGrid.DataSource = orderProductList;
+            }
+            
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -465,13 +524,22 @@ namespace WindowsFormsApp1
 
         private bool CustomerAllFieldsValidator(string comment)
         {
-            if ((customerNameTxtbox.ForeColor == Color.Red ||
-            customerPhoneTxtbox.ForeColor == Color.Red ||
-            customerEmailTxtbox.ForeColor == Color.Red) ||
-            (customerNameTxtbox.Text.Length == 0 ||
-            customerPhoneTxtbox.Text.Length == 0 ||
-            customerEmailTxtbox.Text.Length == 0 ||
-            customerAddressTxtbox.Text.Length == 0))
+            List<TextBox> list = new List<TextBox>()
+            {
+                customerNameTxtbox,
+                customerPhoneTxtbox,
+                customerEmailTxtbox,
+                customerAddressTxtbox
+            };
+            //if ((customerNameTxtbox.ForeColor == Color.Red ||
+            //customerPhoneTxtbox.ForeColor == Color.Red ||
+            //customerEmailTxtbox.ForeColor == Color.Red) ||
+            //(customerNameTxtbox.Text.Length == 0 ||
+            //customerPhoneTxtbox.Text.Length == 0 ||
+            //customerEmailTxtbox.Text.Length == 0 ||
+            //customerAddressTxtbox.Text.Length == 0))
+            if (list.Any(b => b.ForeColor == Color.Red) ||
+                list.Any(b => b.Text.Length == 0))
             {
                 Warning(customerWarningLbl, comment);
                 return false;
@@ -481,11 +549,17 @@ namespace WindowsFormsApp1
 
         private bool ProductAllFieldsValidator(string comment)
         {
-            if (productNameTxtbox.ForeColor == Color.Red ||
-            productCategoryTxtbox.ForeColor == Color.Red ||
-            productQtyTxtbox.ForeColor == Color.Red ||
-            productPriceTxtbox.ForeColor == Color.Red ||
-            productDescriptionTxtbox.ForeColor == Color.Red)
+            List<TextBox> list = new List<TextBox>()
+            {
+                productNameTxtbox,
+                productCategoryTxtbox,
+                productQtyTxtbox,
+                productPriceTxtbox,
+                productDescriptionTxtbox
+            };
+
+            if (list.Any(b => b.ForeColor == Color.Red) ||
+                list.Any(b => b.Text.Length == 0))
             {
                 Warning(productWarningLbl, comment);
                 return false;
@@ -540,6 +614,15 @@ namespace WindowsFormsApp1
         private void productPriceTxtbox_TextChanged(object sender, EventArgs e)
         {
             NumberTxtboxValidator(decimalO, productPriceTxtbox);
+            if (productPriceTxtbox.ForeColor == Color.Black &&
+                productPriceTxtbox.Text.Length > 0)
+            {
+                var decimalO = Decimal.Parse(productPriceTxtbox.Text);
+                if (Decimal.Round(decimalO, 2) != decimalO)
+                {
+                    productPriceTxtbox.ForeColor = Color.Red;
+                }
+            }
         }
 
         private void NumberTxtboxValidator(IConvertible number, TextBox textbox)
@@ -679,15 +762,6 @@ namespace WindowsFormsApp1
             SaveCustomers(CustomersList, CustomersPath);
         }
 
-        private void orderCustomerComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void orderUpdateBtn_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void customerAddressTxtbox_TextChanged(object sender, EventArgs e)
         {
@@ -704,6 +778,24 @@ namespace WindowsFormsApp1
             SaveCustomers(CustomersList, CustomersPath);
             SaveProducts(ProductsList, ProductsPath);
             SaveOrders(OrdersList, OrdersPath);
+        }
+
+        private void orderAddBtn_Click(object sender, EventArgs e)
+        {
+            var customer = orderCustomerComboBox.SelectedItem as Customer;
+            Dictionary<Product, int> productDictionary = new Dictionary<Product, int>();
+            var dateTime = DateTime.Now;
+            OrdersList.Add(new Order(productDictionary, dateTime, customer));
+            orderGridViewLeft.DataSource = null;
+            orderGridViewLeft.DataSource = OrdersList;
+        }
+
+        private void orderDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
+            OrdersList.Remove(selectedOrder);
+            orderGridViewLeft.DataSource = null;
+            orderGridViewLeft.DataSource = OrdersList;
         }
     }
 }
