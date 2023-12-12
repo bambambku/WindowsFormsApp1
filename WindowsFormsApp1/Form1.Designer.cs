@@ -34,7 +34,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.customersPanel = new System.Windows.Forms.Panel();
-            this.saveCustomersBtn = new System.Windows.Forms.Button();
             this.customerNameTxtbox = new System.Windows.Forms.TextBox();
             this.customerWarningLbl = new System.Windows.Forms.Label();
             this.customerDeleteBtn = new System.Windows.Forms.Button();
@@ -48,11 +47,6 @@
             this.customerPhoneTxtbox = new System.Windows.Forms.TextBox();
             this.customerNameLbl = new System.Windows.Forms.Label();
             this.customerDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productWarningLbl = new System.Windows.Forms.Label();
@@ -70,12 +64,10 @@
             this.productDescriptionLbl = new System.Windows.Forms.Label();
             this.productNameLbl = new System.Windows.Forms.Label();
             this.productDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.orderProductQtyWarningLbl = new System.Windows.Forms.Label();
@@ -97,21 +89,28 @@
             this.orderProductLbl = new System.Windows.Forms.Label();
             this.orderDateTimeLbl = new System.Windows.Forms.Label();
             this.orderProductDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Q = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderGridViewLeft = new System.Windows.Forms.DataGridView();
-            this.dateCreatedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.byCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.customersButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateCreatedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.byCustomerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.customerBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -121,17 +120,17 @@
             this.tabPage1.SuspendLayout();
             this.customersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderProductDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderGridViewLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).BeginInit();
@@ -150,7 +149,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1088, 681);
+            this.panel1.Size = new System.Drawing.Size(1175, 681);
             this.panel1.TabIndex = 0;
             // 
             // saveBtn
@@ -171,7 +170,7 @@
             this.tabControl1.Location = new System.Drawing.Point(202, 113);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(830, 533);
+            this.tabControl1.Size = new System.Drawing.Size(915, 533);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -180,15 +179,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(822, 507);
+            this.tabPage1.Size = new System.Drawing.Size(907, 507);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Customers";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // customersPanel
             // 
             this.customersPanel.BackColor = System.Drawing.Color.Gainsboro;
-            this.customersPanel.Controls.Add(this.saveCustomersBtn);
             this.customersPanel.Controls.Add(this.customerNameTxtbox);
             this.customersPanel.Controls.Add(this.customerWarningLbl);
             this.customersPanel.Controls.Add(this.customerDeleteBtn);
@@ -204,19 +202,8 @@
             this.customersPanel.Controls.Add(this.customerDataGrid);
             this.customersPanel.Location = new System.Drawing.Point(-4, 0);
             this.customersPanel.Name = "customersPanel";
-            this.customersPanel.Size = new System.Drawing.Size(820, 518);
+            this.customersPanel.Size = new System.Drawing.Size(911, 518);
             this.customersPanel.TabIndex = 0;
-            this.customersPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.customersPanel_Paint);
-            // 
-            // saveCustomersBtn
-            // 
-            this.saveCustomersBtn.Location = new System.Drawing.Point(629, 87);
-            this.saveCustomersBtn.Name = "saveCustomersBtn";
-            this.saveCustomersBtn.Size = new System.Drawing.Size(75, 23);
-            this.saveCustomersBtn.TabIndex = 10;
-            this.saveCustomersBtn.Text = "button4";
-            this.saveCustomersBtn.UseVisualStyleBackColor = true;
-            this.saveCustomersBtn.Click += new System.EventHandler(this.saveCustomersBtn_Click);
             // 
             // customerNameTxtbox
             // 
@@ -229,7 +216,7 @@
             // customerWarningLbl
             // 
             this.customerWarningLbl.AutoSize = true;
-            this.customerWarningLbl.Location = new System.Drawing.Point(181, 72);
+            this.customerWarningLbl.Location = new System.Drawing.Point(187, 62);
             this.customerWarningLbl.Name = "customerWarningLbl";
             this.customerWarningLbl.Size = new System.Drawing.Size(35, 13);
             this.customerWarningLbl.TabIndex = 8;
@@ -281,7 +268,6 @@
             this.customerAddressLbl.Size = new System.Drawing.Size(45, 13);
             this.customerAddressLbl.TabIndex = 5;
             this.customerAddressLbl.Text = "Address";
-            this.customerAddressLbl.Click += new System.EventHandler(this.label2_Click_2);
             // 
             // customerEmailLbl
             // 
@@ -300,7 +286,6 @@
             this.customerPhoneLbl.Size = new System.Drawing.Size(78, 13);
             this.customerPhoneLbl.TabIndex = 4;
             this.customerPhoneLbl.Text = "Phone Number";
-            this.customerPhoneLbl.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // customerEmailTxtbox
             // 
@@ -326,7 +311,6 @@
             this.customerNameLbl.Size = new System.Drawing.Size(35, 13);
             this.customerNameLbl.TabIndex = 2;
             this.customerNameLbl.Text = "Name";
-            this.customerNameLbl.Click += new System.EventHandler(this.label2_Click);
             // 
             // customerDataGrid
             // 
@@ -341,44 +325,16 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
             this.customerDataGrid.DataSource = this.customerBindingSource1;
-            this.customerDataGrid.Location = new System.Drawing.Point(3, 182);
+            this.customerDataGrid.Location = new System.Drawing.Point(7, 182);
+            this.customerDataGrid.MultiSelect = false;
             this.customerDataGrid.Name = "customerDataGrid";
+            this.customerDataGrid.ReadOnly = true;
             this.customerDataGrid.RowHeadersWidth = 55;
             this.customerDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerDataGrid.Size = new System.Drawing.Size(814, 333);
+            this.customerDataGrid.Size = new System.Drawing.Size(845, 325);
             this.customerDataGrid.TabIndex = 1;
+            this.customerDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.customerDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 225;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Phone";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Phone";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Email";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Email";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 180;
-            // 
-            // customerBindingSource1
-            // 
-            this.customerBindingSource1.DataSource = typeof(WindowsFormsApp1.Customer);
             // 
             // tabPage2
             // 
@@ -386,9 +342,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(822, 507);
+            this.tabPage2.Size = new System.Drawing.Size(907, 507);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Products";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -411,7 +367,7 @@
             this.panel2.Controls.Add(this.productDataGrid);
             this.panel2.Location = new System.Drawing.Point(-4, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(826, 507);
+            this.panel2.Size = new System.Drawing.Size(911, 507);
             this.panel2.TabIndex = 0;
             // 
             // productWarningLbl
@@ -502,7 +458,6 @@
             this.productPriceLbl.Size = new System.Drawing.Size(31, 13);
             this.productPriceLbl.TabIndex = 1;
             this.productPriceLbl.Text = "Price";
-            this.productPriceLbl.Click += new System.EventHandler(this.label5_Click);
             // 
             // productQtyLbl
             // 
@@ -512,7 +467,6 @@
             this.productQtyLbl.Size = new System.Drawing.Size(80, 13);
             this.productQtyLbl.TabIndex = 1;
             this.productQtyLbl.Text = "Stock available";
-            this.productQtyLbl.Click += new System.EventHandler(this.label4_Click);
             // 
             // productCategoryLbl
             // 
@@ -523,7 +477,6 @@
             this.productCategoryLbl.Size = new System.Drawing.Size(49, 13);
             this.productCategoryLbl.TabIndex = 1;
             this.productCategoryLbl.Text = "Category";
-            this.productCategoryLbl.Click += new System.EventHandler(this.label3_Click);
             // 
             // productDescriptionLbl
             // 
@@ -542,7 +495,6 @@
             this.productNameLbl.Size = new System.Drawing.Size(35, 13);
             this.productNameLbl.TabIndex = 1;
             this.productNameLbl.Text = "Name";
-            this.productNameLbl.Click += new System.EventHandler(this.label2_Click_3);
             // 
             // productDataGrid
             // 
@@ -555,48 +507,44 @@
             this.Qty,
             this.Price});
             this.productDataGrid.DataSource = this.productBindingSource2;
-            this.productDataGrid.Location = new System.Drawing.Point(10, 190);
+            this.productDataGrid.Location = new System.Drawing.Point(25, 187);
+            this.productDataGrid.MultiSelect = false;
             this.productDataGrid.Name = "productDataGrid";
+            this.productDataGrid.ReadOnly = true;
             this.productDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productDataGrid.Size = new System.Drawing.Size(810, 314);
+            this.productDataGrid.Size = new System.Drawing.Size(839, 314);
             this.productDataGrid.TabIndex = 0;
+            this.productDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGrid_CellContentClick);
             this.productDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGrid_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 230;
             // 
             // Description
             // 
             this.Description.DataPropertyName = "Description";
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
-            this.Description.Width = 235;
+            this.Description.ReadOnly = true;
+            this.Description.Width = 265;
             // 
             // Category
             // 
             this.Category.DataPropertyName = "Category";
             this.Category.HeaderText = "Category";
             this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
             // 
             // Qty
             // 
             this.Qty.DataPropertyName = "Qty";
             this.Qty.HeaderText = "Qty";
             this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
             // 
             // Price
             // 
             this.Price.DataPropertyName = "Price";
             this.Price.HeaderText = "Price";
             this.Price.Name = "Price";
-            // 
-            // productBindingSource2
-            // 
-            this.productBindingSource2.DataSource = typeof(WindowsFormsApp1.Product);
+            this.Price.ReadOnly = true;
             // 
             // tabPage3
             // 
@@ -604,9 +552,9 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(822, 507);
+            this.tabPage3.Size = new System.Drawing.Size(907, 507);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.Text = "Orders";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel3
@@ -634,9 +582,8 @@
             this.panel3.Controls.Add(this.orderGridViewLeft);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(822, 507);
+            this.panel3.Size = new System.Drawing.Size(907, 507);
             this.panel3.TabIndex = 0;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // orderProductQtyWarningLbl
             // 
@@ -654,7 +601,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 12;
-            this.label2.Click += new System.EventHandler(this.label2_Click_5);
             // 
             // orderDeleteBtn
             // 
@@ -668,7 +614,7 @@
             // 
             // orderProductDeleteBtn
             // 
-            this.orderProductDeleteBtn.Location = new System.Drawing.Point(595, 119);
+            this.orderProductDeleteBtn.Location = new System.Drawing.Point(542, 119);
             this.orderProductDeleteBtn.Name = "orderProductDeleteBtn";
             this.orderProductDeleteBtn.Size = new System.Drawing.Size(124, 46);
             this.orderProductDeleteBtn.TabIndex = 11;
@@ -678,7 +624,7 @@
             // 
             // orderProductAddBtn
             // 
-            this.orderProductAddBtn.Location = new System.Drawing.Point(418, 119);
+            this.orderProductAddBtn.Location = new System.Drawing.Point(396, 119);
             this.orderProductAddBtn.Name = "orderProductAddBtn";
             this.orderProductAddBtn.Size = new System.Drawing.Size(126, 46);
             this.orderProductAddBtn.TabIndex = 11;
@@ -688,7 +634,7 @@
             // 
             // orderAddBtn
             // 
-            this.orderAddBtn.Location = new System.Drawing.Point(20, 119);
+            this.orderAddBtn.Location = new System.Drawing.Point(86, 119);
             this.orderAddBtn.Name = "orderAddBtn";
             this.orderAddBtn.Size = new System.Drawing.Size(112, 46);
             this.orderAddBtn.TabIndex = 11;
@@ -774,7 +720,6 @@
             this.orderProductPrice.Size = new System.Drawing.Size(31, 13);
             this.orderProductPrice.TabIndex = 2;
             this.orderProductPrice.Text = "Price";
-            this.orderProductPrice.Click += new System.EventHandler(this.label6_Click);
             // 
             // orderProductQtyLbl
             // 
@@ -784,7 +729,6 @@
             this.orderProductQtyLbl.Size = new System.Drawing.Size(46, 13);
             this.orderProductQtyLbl.TabIndex = 2;
             this.orderProductQtyLbl.Text = "Quantity";
-            this.orderProductQtyLbl.Click += new System.EventHandler(this.label6_Click);
             // 
             // orderProductLbl
             // 
@@ -794,7 +738,6 @@
             this.orderProductLbl.Size = new System.Drawing.Size(44, 13);
             this.orderProductLbl.TabIndex = 2;
             this.orderProductLbl.Text = "Product";
-            this.orderProductLbl.Click += new System.EventHandler(this.label5_Click_1);
             // 
             // orderDateTimeLbl
             // 
@@ -804,7 +747,6 @@
             this.orderDateTimeLbl.Size = new System.Drawing.Size(58, 13);
             this.orderDateTimeLbl.TabIndex = 2;
             this.orderDateTimeLbl.Text = "Date/Time";
-            this.orderDateTimeLbl.Click += new System.EventHandler(this.label2_Click_4);
             // 
             // orderProductDataGrid
             // 
@@ -818,12 +760,131 @@
             this.priceDataGridViewTextBoxColumn1});
             this.orderProductDataGrid.DataSource = this.productBindingSource2;
             this.orderProductDataGrid.Location = new System.Drawing.Point(354, 185);
+            this.orderProductDataGrid.MultiSelect = false;
             this.orderProductDataGrid.Name = "orderProductDataGrid";
             this.orderProductDataGrid.ReadOnly = true;
             this.orderProductDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.orderProductDataGrid.Size = new System.Drawing.Size(462, 316);
+            this.orderProductDataGrid.Size = new System.Drawing.Size(509, 316);
             this.orderProductDataGrid.TabIndex = 1;
+            this.orderProductDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderProduct_CellContentClick);
             this.orderProductDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderProduct_CellContentClick);
+            // 
+            // Q
+            // 
+            this.Q.HeaderText = "Qty";
+            this.Q.Name = "Q";
+            this.Q.ReadOnly = true;
+            this.Q.Width = 50;
+            // 
+            // orderGridViewLeft
+            // 
+            this.orderGridViewLeft.AutoGenerateColumns = false;
+            this.orderGridViewLeft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderGridViewLeft.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dateCreatedDataGridViewTextBoxColumn,
+            this.byCustomerDataGridViewTextBoxColumn,
+            this.priceDataGridViewTextBoxColumn});
+            this.orderGridViewLeft.DataSource = this.orderBindingSource1;
+            this.orderGridViewLeft.Location = new System.Drawing.Point(6, 185);
+            this.orderGridViewLeft.MultiSelect = false;
+            this.orderGridViewLeft.Name = "orderGridViewLeft";
+            this.orderGridViewLeft.ReadOnly = true;
+            this.orderGridViewLeft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.orderGridViewLeft.Size = new System.Drawing.Size(345, 316);
+            this.orderGridViewLeft.TabIndex = 0;
+            this.orderGridViewLeft.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderGridViewLeft_CellContentClick);
+            this.orderGridViewLeft.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderGridViewLeft_CellContentClick);
+            // 
+            // customersButton
+            // 
+            this.customersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customersButton.Location = new System.Drawing.Point(13, 313);
+            this.customersButton.Name = "customersButton";
+            this.customersButton.Size = new System.Drawing.Size(131, 68);
+            this.customersButton.TabIndex = 4;
+            this.customersButton.Text = "Customers";
+            this.customersButton.UseVisualStyleBackColor = true;
+            this.customersButton.Click += new System.EventHandler(this.customersButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(13, 225);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(130, 65);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Products";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.productsBtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(13, 135);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 66);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Orders";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(394, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(450, 54);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Stock Manager App";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 225;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Phone";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Phone";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 280;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Email";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Email";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 180;
+            // 
+            // customerBindingSource1
+            // 
+            this.customerBindingSource1.DataSource = typeof(WindowsFormsApp1.Customer);
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 230;
+            // 
+            // productBindingSource2
+            // 
+            this.productBindingSource2.DataSource = typeof(WindowsFormsApp1.Product);
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -832,12 +893,6 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             this.dataGridViewTextBoxColumn6.Width = 115;
-            // 
-            // Q
-            // 
-            this.Q.HeaderText = "Qty";
-            this.Q.Name = "Q";
-            this.Q.ReadOnly = true;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -859,23 +914,6 @@
             this.priceDataGridViewTextBoxColumn1.HeaderText = "Price";
             this.priceDataGridViewTextBoxColumn1.Name = "priceDataGridViewTextBoxColumn1";
             this.priceDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // orderGridViewLeft
-            // 
-            this.orderGridViewLeft.AutoGenerateColumns = false;
-            this.orderGridViewLeft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.orderGridViewLeft.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dateCreatedDataGridViewTextBoxColumn,
-            this.byCustomerDataGridViewTextBoxColumn,
-            this.priceDataGridViewTextBoxColumn});
-            this.orderGridViewLeft.DataSource = this.orderBindingSource1;
-            this.orderGridViewLeft.Location = new System.Drawing.Point(6, 185);
-            this.orderGridViewLeft.Name = "orderGridViewLeft";
-            this.orderGridViewLeft.ReadOnly = true;
-            this.orderGridViewLeft.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.orderGridViewLeft.Size = new System.Drawing.Size(345, 316);
-            this.orderGridViewLeft.TabIndex = 0;
-            this.orderGridViewLeft.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.orderGridViewLeft_CellContentClick);
             // 
             // dateCreatedDataGridViewTextBoxColumn
             // 
@@ -902,46 +940,6 @@
             // 
             this.orderBindingSource1.DataSource = typeof(WindowsFormsApp1.Order);
             // 
-            // customersButton
-            // 
-            this.customersButton.Location = new System.Drawing.Point(12, 268);
-            this.customersButton.Name = "customersButton";
-            this.customersButton.Size = new System.Drawing.Size(131, 23);
-            this.customersButton.TabIndex = 4;
-            this.customersButton.Text = "Customers";
-            this.customersButton.UseVisualStyleBackColor = true;
-            this.customersButton.Click += new System.EventHandler(this.customersButton_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(13, 225);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(130, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Products";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.productsBtn_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(13, 178);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(130, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Orders";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(376, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(337, 39);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Stock Manager App";
-            // 
             // customerBindingSource2
             // 
             this.customerBindingSource2.DataSource = typeof(WindowsFormsApp1.Customer);
@@ -962,7 +960,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 682);
+            this.ClientSize = new System.Drawing.Size(1177, 682);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -975,19 +973,19 @@
             this.customersPanel.ResumeLayout(false);
             this.customersPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customerDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.orderProductDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderGridViewLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customerBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource1)).EndInit();
@@ -1004,7 +1002,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource customerBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
@@ -1073,22 +1070,21 @@
         private System.Windows.Forms.TextBox customerNameTxtbox;
         private System.Windows.Forms.TextBox productDescriptionTxtbox;
         private System.Windows.Forms.Label productWarningLbl;
-        private System.Windows.Forms.Button saveCustomersBtn;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Q;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
     }
 }
 

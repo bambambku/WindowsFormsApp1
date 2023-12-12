@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using System.Runtime.InteropServices;
+
 
 namespace WindowsFormsApp1
 {
-
-
-
-
     public partial class Form1 : Form
     {
-        //public Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         public List<Customer> CustomersList { get; set; }
         public List<Product> ProductsList { get; set; }
         public List<Order> OrdersList { get; set; }
@@ -50,64 +38,18 @@ namespace WindowsFormsApp1
         {
             Order handler = new Order(null, DateTime.Now, null);
             return ReadOrdersList(path, handler);
-            //List<Order> newOrdersList = new List<Order>();
-            //newOrdersList.Add(new Order(new Dictionary<Product, int>()
-            //{
-            //    { ProductsList[1], 12 },
-            //    { ProductsList[2], 13 }
-            //}, DateTime.Now, CustomersList[0]));
-            //newOrdersList.Add(new Order(new Dictionary<Product, int>()
-            //{
-            //    { ProductsList[3], 123 },
-            //    { ProductsList[4], 133 }
-            //}, DateTime.Now, CustomersList[2]));
-            //return newOrdersList;
-
         }
 
         private List<Product> GetProducts(string path)
         {
             Product handler = new Product("", "", "", 0, 0);
             return ReadProductsList(path, handler);
-            //List<Product> newProductsList = new List<Product>();
-            //newProductsList.Add(new Product("Scissors", "Extremely sharp scissors", "Office", 123, 9.99m));
-            //newProductsList.Add(new Product("Blue ballpoint pen", "Cheap pen for customers", "Office", 1050, 0.59m));
-            //newProductsList.Add(new Product("Paperclip", "Clip your documents together", "Office", 12456, 0.02m));
-            //newProductsList.Add(new Product("Desk lamp", "Led light, brightness regulated", "Office", 145, 11.99m));
-            //newProductsList.Add(new Product("PC speakers", "5W speaker set for desktop", "Office", 13, 8.99m));
-            //newProductsList.Add(new Product("Notepad", "200 page, line, hardback", "Office", 1123, 5.99m));
-            //return newProductsList;
         }
 
         private List<Customer> GetCustomers(string path)
         {
             Customer handler = new Customer("", "", "", "");
             return ReadCustomersList(path, handler);
-
-            //List<Customer> newCustomersList = new List<Customer>();
-            //newCustomersList.Add(new Customer("Frames Ltd", "07456546456", "13 Barnsley Road WF92LD Pontefract", "frames@gmail.com"));
-            //newCustomersList.Add(new Customer("Barabash", "7845654654", "52 Peackock Crescent LS113LS Leeds", "barabash@gmail.com"));
-            //newCustomersList.Add(new Customer("Galagan", "786943513413", "12 Harness Hill WF32LP Stanley", "galagan@outlook.com"));
-            
-            //return newCustomersList;
-        }
-
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void customersPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void productDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,7 +61,6 @@ namespace WindowsFormsApp1
             productQtyTxtbox.Text = Convert.ToString(selectedProduct.Qty);
             productPriceTxtbox.Text = Convert.ToString(selectedProduct.Price);
             productDescriptionTxtbox.Text = selectedProduct.Description;
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -132,23 +73,7 @@ namespace WindowsFormsApp1
             customerAddressTxtbox.Text = selectedCustomer.Address;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
         private void customerAddClick(object sender, EventArgs e)
-
         {
             if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
 
@@ -204,61 +129,34 @@ namespace WindowsFormsApp1
             tabControl1.SelectedIndex = 1;
         }
 
-        private void label2_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void productNameTxtbox_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void productAddClick(object sender, EventArgs e)
         {
             if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
             if (ProductsList.Any(product => product.Name == productNameTxtbox.Text))
             {
                 Warning(productWarningLbl, "PRODUCT ALREADY EXISTS");
-            } else
+            }
+            else
             {
                 ProductsList.Add(new Product(
                 productNameTxtbox.Text,
                 productDescriptionTxtbox.Text,
                 productCategoryTxtbox.Text,
                 Int32.Parse(productQtyTxtbox.Text),
-                Decimal.Parse(productPriceTxtbox.Text)));
+                Decimal.Round(Decimal.Parse(productPriceTxtbox.Text), 2)));
             }
-            
             productDataGrid.DataSource = null;
             productDataGrid.DataSource = ProductsList;
+            productDataGrid.Rows[productDataGrid.Rows.Count - 1].Selected = true;
+            var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+            productPriceTxtbox.Text = selectedProduct.Price.ToString();
         }
 
         private void productUpdateClick(object sender, EventArgs e)
         {
             if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
             var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
-            if(ProductsList.Where(p => p.Name != selectedProduct.Name).Any(p => p.Name == productNameTxtbox.Text))
+            if (ProductsList.Where(p => p.Name != selectedProduct.Name).Any(p => p.Name == productNameTxtbox.Text))
             {
                 Warning(productWarningLbl, "PRODUCT'S NAME ALREADY EXISTS IN THE LIST");
                 return;
@@ -268,11 +166,12 @@ namespace WindowsFormsApp1
                 productDescriptionTxtbox.Text,
                 productCategoryTxtbox.Text,
                 productQtyTxtbox.Text,
-                productPriceTxtbox.Text
+                Decimal.Round(Decimal.Parse(productPriceTxtbox.Text), 2).ToString()
             };
             PropertiesHandler.Update(selectedProduct, values);
             productDataGrid.DataSource = null;
             productDataGrid.DataSource = ProductsList;
+            productPriceTxtbox.Text = selectedProduct.Price.ToString();
         }
 
         private void productDeleteClick(object sender, EventArgs e)
@@ -281,31 +180,6 @@ namespace WindowsFormsApp1
             ProductsList.Remove(selectedProduct);
             productDataGrid.DataSource = null;
             productDataGrid.DataSource = ProductsList;
-        }
-
-        private void label2_Click_4(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void orderGridViewLeft_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -338,7 +212,8 @@ namespace WindowsFormsApp1
                 orderProductQtyWarningLbl.Text = "";
                 return;
             }
-            if (selectedOrder.ProductOrderDictionary == null) {
+            if (selectedOrder.ProductOrderDictionary == null)
+            {
                 selectedOrder.ProductOrderDictionary.Add(
                  orderProductComboBox.SelectedItem as Product,
                     Int32.Parse(orderProductQtyTxtbox.Text));
@@ -353,7 +228,6 @@ namespace WindowsFormsApp1
                  orderProductComboBox.SelectedItem as Product,
                     Int32.Parse(orderProductQtyTxtbox.Text));
             }
-
             orderGridViewLeft.DataSource = OrdersList;
             orderProductDataGrid_Referesher(selectedOrder);
         }
@@ -382,8 +256,8 @@ namespace WindowsFormsApp1
 
         private void orderPriceTxtboxUpdater()
         {
-            if (orderGridViewLeft.SelectedRows != null && 
-                orderGridViewLeft.SelectedRows.Count > 0 && 
+            if (orderGridViewLeft.SelectedRows != null &&
+                orderGridViewLeft.SelectedRows.Count > 0 &&
                 orderProductComboBox.SelectedItem != null)
             {
                 var selectedOrderComboBox = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
@@ -415,7 +289,6 @@ namespace WindowsFormsApp1
                 }
                 orderPriceTxtbox.Text = newOrderPrice.ToString();
             }
-            
         }
 
         private void orderProductPriceTxtbox_TextChanged(object sender, EventArgs e)
@@ -456,20 +329,11 @@ namespace WindowsFormsApp1
                     orderProductDataGrid[1, index].Value = kvp.Value;
                     index++;
                 }
-            } else
+            }
+            else
             {
                 orderProductDataGrid.DataSource = orderProductList;
             }
-            
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click_5(object sender, EventArgs e)
-        {
 
         }
 
@@ -493,7 +357,6 @@ namespace WindowsFormsApp1
                  orderProductComboBox.SelectedItem as Product,
                     Int32.Parse(orderProductQtyTxtbox.Text));
             }
-
             orderGridViewLeft.DataSource = OrdersList;
             orderProductDataGrid_Referesher(selectedOrder);
         }
@@ -531,13 +394,6 @@ namespace WindowsFormsApp1
                 customerEmailTxtbox,
                 customerAddressTxtbox
             };
-            //if ((customerNameTxtbox.ForeColor == Color.Red ||
-            //customerPhoneTxtbox.ForeColor == Color.Red ||
-            //customerEmailTxtbox.ForeColor == Color.Red) ||
-            //(customerNameTxtbox.Text.Length == 0 ||
-            //customerPhoneTxtbox.Text.Length == 0 ||
-            //customerEmailTxtbox.Text.Length == 0 ||
-            //customerAddressTxtbox.Text.Length == 0))
             if (list.Any(b => b.ForeColor == Color.Red) ||
                 list.Any(b => b.Text.Length == 0))
             {
@@ -636,16 +492,15 @@ namespace WindowsFormsApp1
                     Decimal.TryParse(textbox.Text, out decimal any) ||
                     textbox.Text.Length == 0) ?
                     Color.Black : Color.Red;
-            } else if (number.GetType() == integer.GetType())
+            }
+            else if (number.GetType() == integer.GetType())
             {
                 textbox.ForeColor = (
                     Int32.TryParse(textbox.Text, out int any) ||
                     textbox.Text.Length == 0) ?
                     Color.Black : Color.Red;
             }
-
         }
-
 
         private void productDescriptionTxtbox_TextChanged(object sender, EventArgs e)
         {
@@ -663,7 +518,6 @@ namespace WindowsFormsApp1
             SaveCustomers(CustomersList, CustomersPath);
             SaveProducts(ProductsList, ProductsPath);
             SaveOrders(OrdersList, OrdersPath);
-            //SaveList(CustomersList, CustomersPath);
         }
 
         private void SaveList(List<ICSVable<object>> list, string path)
@@ -678,7 +532,7 @@ namespace WindowsFormsApp1
         }
 
 
-        private void SaveCustomers(List<Customer> customerList,  string customersPath)
+        private void SaveCustomers(List<Customer> customerList, string customersPath)
         {
             string newData = "";
             foreach (Customer item in customerList)
@@ -710,8 +564,8 @@ namespace WindowsFormsApp1
             }
             CSVHandler.Write(ordersPath, newData);
         }
-        
-        
+
+
         private List<object> ReadList(string path, ICSVable<object> handler)
         {
             List<object> CSVableList = new List<object>();
@@ -765,7 +619,7 @@ namespace WindowsFormsApp1
 
         private void customerAddressTxtbox_TextChanged(object sender, EventArgs e)
         {
-            if (customerAddressTxtbox.Text.Contains(',')) customerAddressTxtbox.ForeColor = Color.Red;
+            customerAddressTxtbox.ForeColor = customerAddressTxtbox.Text.Contains(',') ? Color.Red : Color.Black;
         }
 
         private void button2_Click(object sender, EventArgs e)
