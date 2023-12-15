@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿// Implementing Interface for future improvemnents to shorten and simplify the code
+
+namespace WindowsFormsApp1
 {
     public interface ICSVable<T>
     {

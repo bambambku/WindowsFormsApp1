@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+
+
 namespace WindowsFormsApp1
 {
     public class Customer : ICSVable<Customer>
