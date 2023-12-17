@@ -10,10 +10,10 @@ namespace WindowsFormsApp1
 
         public static List<string> Read(string path)
         {
-            string fullPath = $"C:\\Users\\bamba\\source\\repos\\WindowsFormsApp1\\WindowsFormsApp1\\{path}";
-            if (File.Exists(fullPath))
+            //string fullPath = $"C:\\Users\\bamba\\source\\repos\\WindowsFormsApp1\\WindowsFormsApp1\\{path}";
+            if (File.Exists(path))
             {
-                return File.ReadAllLines(fullPath).ToList();
+                return File.ReadAllLines(path).ToList();
             }
             else
             {
@@ -24,8 +24,9 @@ namespace WindowsFormsApp1
         public static void Write(string path, string data)
         {
             //File.WriteAllText(path,data);
-            string fullPath = $"C:\\Users\\bamba\\source\\repos\\WindowsFormsApp1\\WindowsFormsApp1\\{path}";
-            File.WriteAllText(fullPath, data);
+
+            //string fullPath = $"C:\\Users\\bamba\\source\\repos\\WindowsFormsApp1\\WindowsFormsApp1\\{path}";
+            //File.WriteAllText(fullPath, data);
             try
             {
                 File.WriteAllText(path, data);

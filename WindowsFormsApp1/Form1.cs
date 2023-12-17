@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -138,6 +139,12 @@ namespace WindowsFormsApp1
         private void customerDeleteBtn_Click(object sender, EventArgs e)
         {
             var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
+            bool customerInUse = CustomersList.Any(c => c == selectedCustomer);
+            if (customerInUse)
+            {
+                Warning(customerWarningLbl, "CUSTOMER EXISTS IN AN ORDER");
+                return;
+            }
             CustomersList.Remove(selectedCustomer);
             customerDataGrid.DataSource = null;
             customerDataGrid.DataSource = CustomersList;
@@ -204,6 +211,7 @@ namespace WindowsFormsApp1
             if (ProductsList.Any(product => product.Name == productNameTxtbox.Text))
             {
                 Warning(productWarningLbl, "PRODUCT ALREADY EXISTS");
+                return;
             }
             else
             {
@@ -250,6 +258,12 @@ namespace WindowsFormsApp1
         private void productDeleteClick(object sender, EventArgs e)
         {
             var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
+            bool productInUse = OrdersList.Any(o => o.ProductOrderDictionary.Any(kvp => kvp.Key == selectedProduct));
+            if (productInUse)
+            {
+                Warning(productWarningLbl, "PRODUCT EXISTS IN AN ORDER");
+                return;
+            }
             ProductsList.Remove(selectedProduct);
             productDataGrid.DataSource = null;
             productDataGrid.DataSource = ProductsList;
@@ -340,9 +354,7 @@ namespace WindowsFormsApp1
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
             if (orderProductQtyTxtbox.ForeColor == Color.Red)
             {
-                orderProductQtyWarningLbl.Text = "WRONG QUANTITY";
-                Task.Delay(1000).Wait();
-                orderProductQtyWarningLbl.Text = "";
+                Warning(orderProductQtyWarningLbl, "WRONG QUANTITY");
                 return;
             }
             if (selectedOrder.ProductOrderDictionary == null)
@@ -387,7 +399,8 @@ namespace WindowsFormsApp1
                 orderProductQtyTxtbox.ForeColor = Color.Black;
             }
             var orderProductQty = (orderProductQtyTxtbox.Text.Length == 0) ? 0 : qty;
-            orderProductPriceTxtbox.Text = (orderProductQty * selectedProductComboBox.Price).ToString();
+            var price = selectedProductComboBox == null ? 0 : selectedProductComboBox.Price;
+            orderProductPriceTxtbox.Text = (orderProductQty * price).ToString();
         }
 
         private void orderPriceTxtboxUpdater()
@@ -442,7 +455,7 @@ namespace WindowsFormsApp1
         private void orderProductComboBoxChangePriceTextboxUpdate(object sender, EventArgs e)
         {
             orderProductPriceTxtboxUpdater();
-            orderProductLbl.Text = "Product: " + (orderProductComboBox.SelectedItem as Product).Qty.ToString() + " available";
+            orderProductLbl.Text = "Product: " + (orderProductComboBox.SelectedItem as Product)?.Qty.ToString() + " available";
             if (orderGridViewLeft.SelectedRows != null)
             {
                 orderPriceTxtboxUpdater();
