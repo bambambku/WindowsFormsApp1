@@ -534,7 +534,7 @@ namespace WindowsFormsApp1
             label.Text = message;
             Task.Delay(1000).Wait();
             label.ForeColor = Color.Black;
-            label.Text = "nothing, change later";
+            label.Text = "";
         }
 
         // Setting max chars per Textbox
