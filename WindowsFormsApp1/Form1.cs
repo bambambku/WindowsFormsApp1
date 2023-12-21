@@ -97,7 +97,7 @@ namespace WindowsFormsApp1
         private void customerAddClick(object sender, EventArgs e)
         {
             if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
-
+            if (CustomersList == null) CustomersList = new List<Customer>();
             if (CustomersList.Any(customer => customer.Name == customerNameTxtbox.Text))
             {
                 Warning(customerWarningLbl, "CUSTOMER ALREADY EXISTS");
@@ -116,6 +116,7 @@ namespace WindowsFormsApp1
 
         private void customerUpdateBtn_Click(object sender, EventArgs e)
         {
+            if (CustomersList == null || CustomersList.Count == 0) return;
             if (!CustomerAllFieldsValidator("WRONG DATA ENTERED")) return;
             var selectedCustomer = customerDataGrid.SelectedRows[0].DataBoundItem as Customer;
             if (CustomersList.Where(p => p.Name != selectedCustomer.Name).Any(p => p.Name == customerNameTxtbox.Text))
@@ -208,6 +209,7 @@ namespace WindowsFormsApp1
         private void productAddClick(object sender, EventArgs e)
         {
             if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
+            if (ProductsList == null) ProductsList = new List<Product>();
             if (ProductsList.Any(product => product.Name == productNameTxtbox.Text))
             {
                 Warning(productWarningLbl, "PRODUCT ALREADY EXISTS");
@@ -233,6 +235,7 @@ namespace WindowsFormsApp1
 
         private void productUpdateClick(object sender, EventArgs e)
         {
+            if (ProductsList == null || ProductsList.Count == 0) return;
             if (!ProductAllFieldsValidator("WRONG DATA ENTERED")) return;
             var selectedProduct = productDataGrid.SelectedRows[0].DataBoundItem as Product;
             if (ProductsList.Where(p => p.Name != selectedProduct.Name).Any(p => p.Name == productNameTxtbox.Text))
@@ -351,6 +354,7 @@ namespace WindowsFormsApp1
 
         private void orderProductAddBtn_Click(object sender, EventArgs e)
         {
+            if (ProductsList == null || ProductsList.Count == 0) return;
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
             if (orderProductQtyTxtbox.ForeColor == Color.Red)
             {
@@ -486,35 +490,9 @@ namespace WindowsFormsApp1
 
         }
 
-        //private void orderProductUpdateBtn_Click(object sender, EventArgs e)
-        //{
-        //    var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
-        //    if (orderProductQtyTxtbox.ForeColor == Color.Red)
-        //    {
-        //        orderProductQtyWarningLbl.Text = "WRONG QUANTITY";
-        //        Task.Delay(1000).Wait();
-        //        orderProductQtyWarningLbl.Text = "";
-        //        return;
-        //    }
-        //    if (selectedOrder.ProductOrderDictionary.ContainsKey(orderProductComboBox.SelectedItem as Product))
-        //    {
-        //        selectedOrder.ProductOrderDictionary[orderProductComboBox.SelectedItem as Product] = Int32.Parse(orderProductQtyTxtbox.Text);
-        //    }
-        //    else
-        //    {
-        //        selectedOrder.ProductOrderDictionary.Add(
-        //         orderProductComboBox.SelectedItem as Product,
-        //            Int32.Parse(orderProductQtyTxtbox.Text));
-        //    }
-            
-        //    selectedOrder.Price = selectedOrder.GetPrice(selectedOrder.ProductOrderDictionary);
-        //    orderPriceTxtboxUpdater();
-        //    orderProductDataGrid_Referesher(selectedOrder);
-        //    orderGridViewLeft.DataSource = OrdersList;
-        //}
-
         private void orderProductDeleteBtn_Click(object sender, EventArgs e)
         {
+            if (OrdersList == null || OrdersList.Count == 0) return;
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
             if (selectedOrder.ProductOrderDictionary.ContainsKey(orderProductComboBox.SelectedItem as Product))
             {
@@ -529,6 +507,7 @@ namespace WindowsFormsApp1
 
         private void orderAddBtn_Click(object sender, EventArgs e)
         {
+            if (OrdersList == null) OrdersList = new List<Order>();
             var customer = orderCustomerComboBox.SelectedItem as Customer;
             Dictionary<Product, int> productDictionary = new Dictionary<Product, int>();
             var dateTime = DateTime.Now;
@@ -539,6 +518,7 @@ namespace WindowsFormsApp1
 
         private void orderDeleteBtn_Click(object sender, EventArgs e)
         {
+            if (OrdersList == null || OrdersList.Count == 0) return;
             var selectedOrder = orderGridViewLeft.SelectedRows[0].DataBoundItem as Order;
             OrdersList.Remove(selectedOrder);
             orderGridViewLeft.DataSource = null;
@@ -595,6 +575,7 @@ namespace WindowsFormsApp1
         // Saving operations
         private void SaveCustomers(List<Customer> customerList, string customersPath)
         {
+            if (customerList == null) return;
             string newData = "";
             foreach (Customer item in customerList)
             {
@@ -607,16 +588,21 @@ namespace WindowsFormsApp1
         private void SaveProducts(List<Product> productsList, string productsPath)
         {
             string newData = "";
-            foreach (Product item in productsList)
+            if (productsList != null)
             {
-                string itemData = item.ToCSVString();
-                newData += $"{itemData}\n";
+                foreach (Product item in productsList)
+                {
+                    string itemData = item.ToCSVString();
+                    newData += $"{itemData}\n";
+                }
+                CSVHandler.Write(productsPath, newData);
             }
-            CSVHandler.Write(productsPath, newData);
+            
         }
 
         private void SaveOrders(List<Order> ordersList, string ordersPath)
         {
+            if (ordersList == null) return;
             string newData = "";
             foreach (Order item in ordersList)
             {
@@ -638,10 +624,13 @@ namespace WindowsFormsApp1
         {
             List<Customer> CSVableList = new List<Customer>();
             List<string> list = CSVHandler.Read(path);
-            foreach (var item in list)
+            if (list != null)
             {
-                CSVableList.Add(handler.FromCSVString(item));
-            }
+                foreach (var item in list)
+                {
+                    CSVableList.Add(handler.FromCSVString(item));
+                }
+            }            
             return CSVableList;
         }
 
@@ -649,10 +638,13 @@ namespace WindowsFormsApp1
         {
             List<Product> CSVableList = new List<Product>();
             List<string> list = CSVHandler.Read(path);
-            foreach (var item in list)
+            if (list != null)
             {
-                CSVableList.Add(handler.FromCSVString(item));
-            }
+                foreach (var item in list)
+                {
+                    CSVableList.Add(handler.FromCSVString(item));
+                }
+            }            
             return CSVableList;
         }
 
@@ -660,10 +652,13 @@ namespace WindowsFormsApp1
         {
             List<Order> CSVableList = new List<Order>();
             List<string> list = CSVHandler.Read(path);
-            foreach (var item in list)
+            if (list != null)
             {
-                CSVableList.Add(handler.FromCSVString(item, ProductsList, CustomersList));
-            }
+                foreach (var item in list)
+                {
+                    CSVableList.Add(handler.FromCSVString(item, ProductsList, CustomersList));
+                }
+            }            
             return CSVableList;
         }
 
